@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>leriia — Product Designer</title>
+  <meta name="description" content="Portfolio landing page for a Product Designer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header container">
+    <a class="brand" href="#" aria-label="Home">leriia</a>
+    <nav class="nav">
+      <a class="nav__link" href="#resume">Resume</a>
+      <a class="btn btn--dark" href="#contact">Get in Touch</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1 class="mega">Product Designer</h1>
+    </section>
+
+    <section class="tiles container">
+      <!-- Row 1: 2 tiles -->
+      <div class="row row--2">
+        <a href="#about" class="tile">
+          <span class="tile__title">About Me</span>
+        </a>
+        <a href="#looomy" class="tile tile--media">
+          <div class="tile__labels">
+            <span class="muted">iOS App</span>
+          </div>
+          <span class="tile__title">Loomy</span>
+          <img class="phone" src="assets/iphone-top.png" alt="iPhone top">
+        </a>
+      </div>
+
+      <!-- Row 2: 3 tiles -->
+      <div class="row row--3">
+        <a href="#projects" class="tile">
+          <span class="tile__title">All<br>Projects</span>
+        </a>
+        <a href="#resume" class="tile">
+          <span class="tile__title">Resume</span>
+        </a>
+        <a href="#skills" class="tile">
+          <span class="tile__title">Skills</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container" id="contact">
+    <div class="footer__left">
+      <a class="btn btn--dark" href="mailto:your@email.com">Mail Me</a>
+      <a class="email" href="mailto:your@email.com">your@email.com</a>
+    </div>
+    <div class="footer__right">
+      <a class="icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="assets/instagram.svg" alt="" aria-hidden="true">
+      </a>
+      <a class="icon" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="assets/linkedin.svg" alt="" aria-hidden="true">
+      </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
