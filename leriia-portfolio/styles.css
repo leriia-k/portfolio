@@ -6,6 +6,7 @@
   --ink: #111111;
   --muted: #6a6a6a;
   --tile: #e6e6e6;
+  --gap: 24px;
 }
 
 *{box-sizing:border-box}
@@ -19,7 +20,7 @@ body{
 .container{
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--gap);
 }
 
 a{color: inherit; text-decoration: none}
@@ -29,7 +30,7 @@ a{color: inherit; text-decoration: none}
   display: grid;
   grid-template-columns: 1fr auto; /* слева бренд, справа навигация */
   align-items: center;
-  padding: 20px 24px;
+  padding: 20px var(--gap);
 }
 .brand{
   justify-self: start;
@@ -63,23 +64,33 @@ a{color: inherit; text-decoration: none}
   margin: 0;
 }
 
-/* ---------- Tiles ---------- */
-.tiles{margin: 14px 0 28px}
+/* ---------- Tiles (FULL-BLEED) ---------- */
+/* Делаем секцию плиток на всю ширину страницы: без max-width и без внутренних паддингов */
+.tiles.container{
+  max-width: none;     /* снимаем ограничение 1140px */
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;         /* растягиваем на ширину вьюпорта */
+}
 
+/* Каждая строка — грид, который занимает всю ширину (крайние плитки прижаты к краям),
+   между плитками одинаковый gap */
 .row{
   display: grid;
-  gap: 24px;
-  justify-content: center;   /* центрируем сетку */
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+  /* важно: не центрируем и не ограничиваем ширину, чтобы занять 100% */
 }
 
+/* Ряд 1 — две равные колонки по всей ширине */
 .row--2{
-  grid-template-columns: repeat(2, 320px); /* фикс ширина плитки */
-  justify-content: center;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: var(--gap);
 }
+
+/* Ряд 2 — три равные колонки по всей ширине */
 .row--3{
-  grid-template-columns: repeat(3, 280px);
-  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .tile{
@@ -122,7 +133,7 @@ a{color: inherit; text-decoration: none}
   grid-template-columns: 1fr auto; /* лево / право */
   align-items:center;
   gap: 16px;
-  padding: 24px 24px 40px;
+  padding: 24px var(--gap) 40px;
 }
 .footer__left{
   justify-self: start;
@@ -144,6 +155,10 @@ a{color: inherit; text-decoration: none}
 .icon img{width:18px; height:18px; filter: invert(1)}
 
 /* ---------- Responsive ---------- */
+@media (max-width: 1080px){
+  /* чуть раньше складываем три колонки в две, чтобы сохранялась ритмика */
+  .row--3{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 900px){
   .header{
     grid-template-columns: 1fr;
@@ -152,8 +167,8 @@ a{color: inherit; text-decoration: none}
   }
   .nav{ justify-self: center; }
 
-  .row--2{ grid-template-columns: 1fr !important; }
-  .row--3{ grid-template-columns: 1fr !important; }
+  .row--2{ grid-template-columns: 1fr; }
+  .row--3{ grid-template-columns: 1fr; }
   .row--2 .tile{ min-height: 260px; }
   .mega{font-size: clamp(44px, 10vw, 96px);}
 
