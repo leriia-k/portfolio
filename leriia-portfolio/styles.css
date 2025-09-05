@@ -17,10 +17,9 @@ body{
   background: var(--bg);
   line-height: 1.5;
 }
-
 a{color: inherit; text-decoration: none}
 
-/* Единый контейнер для боковых отступов всех секций */
+/* Единый контейнер — одинаковые боковые отступы для всех секций */
 .container{
   max-width: var(--page-max);
   margin: 0 auto;
@@ -33,7 +32,7 @@ a{color: inherit; text-decoration: none}
   display: grid;
   grid-template-columns: 1fr auto; /* слева бренд, справа навигация */
   align-items: center;
-  padding: 20px 0; /* только вертикальные — боковые задаёт .container */
+  padding: 20px 0; /* только вертикальные — бока задаёт .container */
 }
 .brand{
   justify-self: start;
@@ -80,39 +79,41 @@ a{color: inherit; text-decoration: none}
 .hero{ margin: 8px 0 16px; }
 .mega{
   font-weight: 700;
-  font-size: clamp(32px, 8vw, 120px); /* адаптивный размер */
+  font-size: clamp(32px, 8vw, 120px); /* адаптивный размер под одну строку */
   letter-spacing: -0.02em;
   line-height: 1;
   color: #d9d9d9;
   margin: 0;
-
   white-space: nowrap;        /* одна строка */
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;         /* центр текста внутри контейнера */
+  text-align: center;
 }
 
 /* ---------- Tiles ---------- */
 .tiles{ margin: 14px 0 28px; }
 
+/* ЕДИНАЯ сетка с равными промежутками */
 .row{
   display: grid;
   gap: var(--gap);
 }
 
-/* ЕДИНАЯ СЕТКА 6 КОЛОНОК ДЛЯ ОБОИХ РЯДОВ */
+/* Desktop: 6 колонок
+   - верхний ряд: 2 плитки × span 3
+   - нижний ряд: 3 плитки × span 2 */
 .row--2{
   grid-template-columns: repeat(6, minmax(0, 1fr));
   margin-bottom: var(--gap);
 }
-.row--2 > .tile{ grid-column: span 3; }   /* 2 плитки по 3 колонки = 6 */
+.row--2 > .tile{ grid-column: span 3; }
 
 .row--3{
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
-.row--3 > .tile{ grid-column: span 2; }   /* 3 плитки по 2 колонки = 6 */
+.row--3 > .tile{ grid-column: span 2; }
 
-/* Карточки и медиа — как было */
+/* Карточка */
 .tile{
   background: var(--tile);
   border-radius: var(--radius);
@@ -124,26 +125,33 @@ a{color: inherit; text-decoration: none}
   border: 1px solid #e1e1e1;
   transition: box-shadow .2s ease, transform .06s ease;
 }
-.row--2 .tile{ min-height: 340px; }
-.row--3 .tile{ min-height: 240px; }
+.tile:hover{ box-shadow: 0 10px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
 
+.tile__title{
+  font-size: clamp(18px, 1.3vw + 14px, 28px);
+  font-weight: 500;
+}
+
+/* Медиа-карточка Loomy */
 .tile--media{
   overflow:hidden;
-  align-items:flex-start; justify-content:center;
+  align-items:flex-start;
+  justify-content:center;
 }
 .tile--media .tile__labels{
-  position:absolute; top:18px; width:100%; display:flex; justify-content:center;
+  position:absolute; top:18px; width:100%;
+  display:flex; justify-content:center;
 }
+.muted{ color:#8a8a8a; font-size:14px; }
+.tile--media .tile__title{ margin-top: 28px; }
 .tile--media .phone{
   position:absolute; bottom:-40px; left:50%; transform: translateX(-50%);
   width: 76%; max-width: 520px;
 }
 
-/* Респонсив: на узких всё в одну колонку */
-@media (max-width: 900px){
-  .row--2, .row--3{ grid-template-columns: 1fr; }
-  .row--2 > .tile, .row--3 > .tile{ grid-column: auto; }
-}
+/* Высоты (под макет) */
+.row--2 .tile{ min-height: 340px; }
+.row--3 .tile{ min-height: 240px; }
 
 /* ---------- Footer ---------- */
 .footer{
@@ -151,7 +159,7 @@ a{color: inherit; text-decoration: none}
   grid-template-columns: 1fr auto; /* лево / право */
   align-items:center;
   gap: 16px;
-  padding: 24px 0 40px; /* только вертикальные — боковые задаёт .container */
+  padding: 24px 0 40px; /* только вертикальные — бока задаёт .container */
 }
 .footer__left{
   justify-self: start;
@@ -172,10 +180,14 @@ a{color: inherit; text-decoration: none}
 .icon img{ width:18px; height:18px; filter: invert(1); }
 
 /* ---------- Responsive ---------- */
+/* На планшете: 4 колонки (оба ряда), спаны по 2 */
 @media (max-width: 1080px){
-  /* три колонки превращаем в две чуть раньше, чтобы сохранялась ритмика */
-  .row--3{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row--2, .row--3{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .row--2 > .tile{ grid-column: span 2; }
+  .row--3 > .tile{ grid-column: span 2; }
 }
+
+/* На мобильном: одна колонка */
 @media (max-width: 900px){
   .header{
     grid-template-columns: 1fr;
@@ -184,8 +196,8 @@ a{color: inherit; text-decoration: none}
   }
   .nav{ justify-self: center; }
 
-  .row--2{ grid-template-columns: 1fr; }
-  .row--3{ grid-template-columns: 1fr; }
+  .row--2, .row--3{ grid-template-columns: 1fr; }
+  .row--2 > .tile, .row--3 > .tile{ grid-column: auto; }
   .row--2 .tile{ min-height: 260px; }
 
   .footer{
