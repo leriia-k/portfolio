@@ -90,7 +90,7 @@
         </a>
 
         <!-- Skills -->
-        <a href="#skills" class="tile tile--skills">
+        <a href="#skills" class="tile tile--skills" id="skills">
           <span class="tile__title">Skills</span>
           <div class="tile__hover">
             Figma, Sketch, Adobe XD<br />
@@ -151,7 +151,6 @@
       </header>
 
       <section class="modal__content">
-        <!-- сюда можно добавлять превью/слайды проектов -->
         <div class="gallery">
           <img src="assets/projects-slide-1.jpg" alt="Projects slide 1 (placeholder)" />
           <img src="assets/projects-slide-2.jpg" alt="Projects slide 2 (placeholder)" />
@@ -171,7 +170,6 @@
         modal.classList.add('is-open');
         modal.removeAttribute('aria-hidden');
         document.documentElement.style.overflow = 'hidden';
-        // фокус внутрь
         const sheet = modal.querySelector('.modal__sheet');
         setTimeout(()=>{
           const f = sheet.querySelector(focusableSel);
@@ -186,14 +184,12 @@
         document.documentElement.style.overflow = '';
       }
 
-      // Делегирование: клик по триггеру с data-modal
       document.addEventListener('click', (e)=>{
         const trigger = e.target.closest('[data-modal]');
         if (trigger){
           const sel = trigger.getAttribute('data-modal');
           const modal = document.querySelector(sel);
           openModal(modal);
-          // вернём фокус на триггер после закрытия
           modal.addEventListener('modal:closed', ()=>trigger.focus(), {once:true});
         }
         if (e.target.dataset.close === 'modal'){
@@ -203,7 +199,6 @@
         }
       });
 
-      // Esc для всех открытых модалок
       document.addEventListener('keydown', (e)=>{
         if (e.key !== 'Escape') return;
         const open = document.querySelector('.modal.is-open');
