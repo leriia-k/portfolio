@@ -33,17 +33,19 @@
 
   <!-- Tiles -->
   <section class="tiles container">
-    <!-- Row 1: 2 tiles -->
+    <!-- Row 1: 2 tiles (each spans 3 of 6 columns) -->
     <div class="row row--2">
-     <a href="#about" class="tile tile--about">
-  <span class="tile__title">About Me</span>
-  <div class="tile__hover">
-    <p>Leriia Kalashnikova<br>
-    26 yo<br>
-    4 years experience...</p>
-  </div>
+      <!-- About Me with hover text in top-left (40px padding) -->
+      <a href="#about" class="tile tile--about">
+        <span class="tile__title">About Me</span>
+        <div class="tile__hover">
+          Leriia Kalashnikova<br />
+          26 yo<br />
+          4 years experience...
+        </div>
       </a>
 
+      <!-- Loomy media card -->
       <a href="#looomy" class="tile tile--media">
         <div class="tile__labels"><span class="muted">iOS App</span></div>
         <span class="tile__title">Loomy</span>
@@ -51,7 +53,7 @@
       </a>
     </div>
 
-    <!-- Row 2: 3 tiles -->
+    <!-- Row 2: 3 tiles (each spans 2 of 6 columns) -->
     <div class="row row--3">
       <a href="#projects" class="tile">
         <span class="tile__title">All<br />Projects</span>
@@ -83,7 +85,7 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- Script (optional) -->
   <script src="script.js"></script>
 </body>
 </html>
