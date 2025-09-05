@@ -61,7 +61,7 @@ html, body{overflow-x:hidden}
 .btn--dark:hover, .btn--outline:hover{ background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* ---------- Hero ---------- */
-.hero{ margin: 8px 0 16px; }
+.hero{ margin: 8px 0 32px; }
 .mega{
   font-weight: 700;
   font-size: clamp(28px, 7.2vw, 110px);
