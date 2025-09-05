@@ -46,8 +46,14 @@
           </div>
         </a>
 
-        <!-- Loomy (cover на ховере). По клику — открываем модальную вкладку -->
-        <button type="button" class="tile tile--media open-loomy" aria-haspopup="dialog" aria-controls="loomy-modal" aria-label="Open Loomy case">
+        <!-- Loomy (cover на ховере). По клику — модальная вкладка -->
+        <button
+          type="button"
+          class="tile tile--media"
+          data-modal="#loomy-modal"
+          aria-haspopup="dialog"
+          aria-controls="loomy-modal"
+          aria-label="Open Loomy case">
           <div class="media-wrap">
             <div class="tile__labels"><span class="muted">iOS App</span></div>
             <span class="tile__title">Loomy</span>
@@ -59,14 +65,20 @@
 
       <!-- Row 2 -->
       <div class="row row--3">
-        <!-- All Projects -->
-        <a href="#projects" class="tile tile--projects">
+        <!-- All Projects (по клику — модальная вкладка Projects) -->
+        <button
+          type="button"
+          class="tile tile--projects"
+          data-modal="#projects-modal"
+          aria-haspopup="dialog"
+          aria-controls="projects-modal"
+          aria-label="Open all projects">
           <span class="tile__title">All<br />Projects</span>
           <div class="tile__hover">
-            <img src="assets/projects.svg" alt="View Projects" class="projects-icon" />
+            <img src="assets/projects.svg" alt="" class="projects-icon" aria-hidden="true" />
             <p class="projects-text">View All Projects</p>
           </div>
-        </a>
+        </button>
 
         <!-- Resume -->
         <a href="assets/leriia-resume.pdf" download class="tile tile--resume" id="resume">
@@ -107,10 +119,10 @@
 
   </div> <!-- /.page -->
 
-  <!-- ---------- Loomy modal (вкладка поверх главной) ---------- -->
+  <!-- ---------- Loomy modal ---------- -->
   <div class="modal" id="loomy-modal" role="dialog" aria-modal="true" aria-label="Loomy case" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
-    <div class="modal__sheet" role="document">
+    <div class="modal__sheet" role="document" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
 
       <header class="modal__header">
@@ -119,7 +131,6 @@
       </header>
 
       <section class="modal__content">
-        <!-- Помести сюда изображения/слайды из презентации -->
         <div class="gallery">
           <img src="assets/loomy-slide-1.jpg" alt="Loomy slide 1 (placeholder)" />
           <img src="assets/loomy-slide-2.jpg" alt="Loomy slide 2 (placeholder)" />
@@ -128,39 +139,78 @@
     </div>
   </div>
 
+  <!-- ---------- Projects modal ---------- -->
+  <div class="modal" id="projects-modal" role="dialog" aria-modal="true" aria-label="All projects" aria-hidden="true">
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+
+      <header class="modal__header">
+        <h2 class="modal__title">All Projects</h2>
+        <p class="modal__subtitle">Portfolio overview / slides area</p>
+      </header>
+
+      <section class="modal__content">
+        <!-- сюда можно добавлять превью/слайды проектов -->
+        <div class="gallery">
+          <img src="assets/projects-slide-1.jpg" alt="Projects slide 1 (placeholder)" />
+          <img src="assets/projects-slide-2.jpg" alt="Projects slide 2 (placeholder)" />
+        </div>
+      </section>
+    </div>
+  </div>
+
   <!-- Script -->
   <script>
     (function(){
-      const openBtn = document.querySelector('.open-loomy');
-      const modal = document.getElementById('loomy-modal');
-      const sheet = modal.querySelector('.modal__sheet');
-      const focusableSel = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+      const focusableSel =
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
-      function openModal(){
+      function openModal(modal){
+        if (!modal) return;
         modal.classList.add('is-open');
         modal.removeAttribute('aria-hidden');
-        // блокируем прокрутку body
         document.documentElement.style.overflow = 'hidden';
         // фокус внутрь
+        const sheet = modal.querySelector('.modal__sheet');
         setTimeout(()=>{
           const f = sheet.querySelector(focusableSel);
           (f || sheet).focus();
         }, 10);
       }
-      function closeModal(){
+
+      function closeModal(modal){
+        if (!modal) return;
         modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('aria-hidden','true');
         document.documentElement.style.overflow = '';
-        openBtn.focus();
       }
 
-      openBtn.addEventListener('click', openModal);
-      modal.addEventListener('click', (e)=>{
-        if (e.target.dataset.close === 'modal') closeModal();
+      // Делегирование: клик по триггеру с data-modal
+      document.addEventListener('click', (e)=>{
+        const trigger = e.target.closest('[data-modal]');
+        if (trigger){
+          const sel = trigger.getAttribute('data-modal');
+          const modal = document.querySelector(sel);
+          openModal(modal);
+          // вернём фокус на триггер после закрытия
+          modal.addEventListener('modal:closed', ()=>trigger.focus(), {once:true});
+        }
+        if (e.target.dataset.close === 'modal'){
+          const m = e.target.closest('.modal');
+          closeModal(m);
+          m.dispatchEvent(new Event('modal:closed'));
+        }
       });
+
+      // Esc для всех открытых модалок
       document.addEventListener('keydown', (e)=>{
-        if (!modal.classList.contains('is-open')) return;
-        if (e.key === 'Escape') closeModal();
+        if (e.key !== 'Escape') return;
+        const open = document.querySelector('.modal.is-open');
+        if (open){
+          closeModal(open);
+          open.dispatchEvent(new Event('modal:closed'));
+        }
       });
     })();
   </script>
