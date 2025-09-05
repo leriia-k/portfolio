@@ -46,15 +46,15 @@
           </div>
         </a>
 
-        <!-- Loomy (cover на ховере) -->
-        <a href="#looomy" class="tile tile--media">
+        <!-- Loomy (cover на ховере). По клику — открываем модальную вкладку -->
+        <button type="button" class="tile tile--media open-loomy" aria-haspopup="dialog" aria-controls="loomy-modal" aria-label="Open Loomy case">
           <div class="media-wrap">
             <div class="tile__labels"><span class="muted">iOS App</span></div>
             <span class="tile__title">Loomy</span>
           </div>
-          <img class="phone" src="assets/iphone-top.png" alt="iPhone top" />
-          <img class="media-cover" src="assets/loomy-cover.jpg" alt="Loomy cover" />
-        </a>
+          <img class="phone" src="assets/iphone-top.png" alt="" aria-hidden="true" />
+          <img class="media-cover" src="assets/loomy-cover.jpg" alt="" aria-hidden="true" />
+        </button>
       </div>
 
       <!-- Row 2 -->
@@ -107,6 +107,62 @@
 
   </div> <!-- /.page -->
 
-  <script src="script.js"></script>
+  <!-- ---------- Loomy modal (вкладка поверх главной) ---------- -->
+  <div class="modal" id="loomy-modal" role="dialog" aria-modal="true" aria-label="Loomy case" aria-hidden="true">
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__sheet" role="document">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+
+      <header class="modal__header">
+        <h2 class="modal__title">Loomy — iOS App</h2>
+        <p class="modal__subtitle">Case study / preview area</p>
+      </header>
+
+      <section class="modal__content">
+        <!-- Помести сюда изображения/слайды из презентации -->
+        <div class="gallery">
+          <img src="assets/loomy-slide-1.jpg" alt="Loomy slide 1 (placeholder)" />
+          <img src="assets/loomy-slide-2.jpg" alt="Loomy slide 2 (placeholder)" />
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    (function(){
+      const openBtn = document.querySelector('.open-loomy');
+      const modal = document.getElementById('loomy-modal');
+      const sheet = modal.querySelector('.modal__sheet');
+      const focusableSel = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+      function openModal(){
+        modal.classList.add('is-open');
+        modal.removeAttribute('aria-hidden');
+        // блокируем прокрутку body
+        document.documentElement.style.overflow = 'hidden';
+        // фокус внутрь
+        setTimeout(()=>{
+          const f = sheet.querySelector(focusableSel);
+          (f || sheet).focus();
+        }, 10);
+      }
+      function closeModal(){
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+        openBtn.focus();
+      }
+
+      openBtn.addEventListener('click', openModal);
+      modal.addEventListener('click', (e)=>{
+        if (e.target.dataset.close === 'modal') closeModal();
+      });
+      document.addEventListener('keydown', (e)=>{
+        if (!modal.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
