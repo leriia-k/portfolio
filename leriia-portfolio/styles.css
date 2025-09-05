@@ -20,11 +20,12 @@ body{
 
 a{color: inherit; text-decoration: none}
 
-/* Общий контейнер для «центра страницы» */
+/* Единый контейнер для боковых отступов всех секций */
 .container{
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: 0 var(--gap);
+  padding-left: var(--gap);
+  padding-right: var(--gap);
 }
 
 /* ---------- Header ---------- */
@@ -32,7 +33,7 @@ a{color: inherit; text-decoration: none}
   display: grid;
   grid-template-columns: 1fr auto; /* слева бренд, справа навигация */
   align-items: center;
-  padding: 20px var(--gap);
+  padding: 20px 0; /* только вертикальные — боковые задаёт .container */
 }
 .brand{
   justify-self: start;
@@ -79,7 +80,7 @@ a{color: inherit; text-decoration: none}
 .hero{ margin: 8px 0 16px; }
 .mega{
   font-weight: 700;
-  font-size: clamp(32px, 8vw, 120px); /* адаптивный размер, чтобы влезало в одну строку */
+  font-size: clamp(32px, 8vw, 120px); /* адаптивный размер */
   letter-spacing: -0.02em;
   line-height: 1;
   color: #d9d9d9;
@@ -88,34 +89,19 @@ a{color: inherit; text-decoration: none}
   white-space: nowrap;        /* одна строка */
   overflow: hidden;
   text-overflow: ellipsis;
-
-  max-width: var(--page-max); /* ширина как у хедера/футера */
-  padding: 0 var(--gap);      /* такие же боковые отступы */
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  text-align: center;         /* центр текста внутри контейнера */
 }
 
-/* ---------- Tiles (FULL-BLEED с боковыми отступами) ---------- */
-/* Секция плиток тянется на всю ширину вьюпорта, но имеет те же внутренние отступы, что и хедер/футер */
-.tiles.container{
-  max-width: none;
-  width: 100%;
-  padding-left: var(--gap);
-  padding-right: var(--gap);
-  margin-left: auto;
-  margin-right: auto;
-}
+/* ---------- Tiles ---------- */
 .tiles{ margin: 14px 0 28px; }
 
-/* Каждая строка — full-bleed grid, крайние плитки прижаты к краям, равномерные промежутки */
 .row{
   display: grid;
   column-gap: var(--gap);
   row-gap: var(--gap);
 }
 
-/* Ряд 1: 2 равные колонки на всю ширину между отступами */
+/* Ряд 1: 2 равные колонки в пределах контейнера */
 .row--2{
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-bottom: var(--gap);
@@ -172,7 +158,7 @@ a{color: inherit; text-decoration: none}
   grid-template-columns: 1fr auto; /* лево / право */
   align-items:center;
   gap: 16px;
-  padding: 24px var(--gap) 40px;
+  padding: 24px 0 40px; /* только вертикальные — боковые задаёт .container */
 }
 .footer__left{
   justify-self: start;
