@@ -13,95 +13,99 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="header container">
-    <a class="brand" href="#" aria-label="Home">leriia</a>
-    <nav class="nav" aria-label="Main navigation">
-      <a class="btn btn--outline" href="#resume">
-        <img src="assets/resume.svg" alt="" class="btn__icon" /> Resume
-      </a>
-      <a class="btn btn--dark" href="#contact">Get in Touch</a>
-    </nav>
-  </header>
+  <!-- ЕДИНЫЙ КОНТЕЙНЕР ДЛЯ ВСЕГО КОНТЕНТА -->
+  <div class="page container">
 
-  <!-- Hero -->
-  <section class="hero container">
-    <h1 class="mega">Product Designer</h1>
-  </section>
+    <!-- Header -->
+    <header class="header">
+      <a class="brand" href="#" aria-label="Home">leriia</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="btn btn--outline" href="#resume">
+          <img src="assets/resume.svg" alt="" class="btn__icon" /> Resume
+        </a>
+        <a class="btn btn--dark" href="#contact">Get in Touch</a>
+      </nav>
+    </header>
 
-  <!-- Tiles -->
-  <section class="tiles container">
-    <!-- Row 1 -->
-    <div class="row row--2">
-      <!-- About Me -->
-      <a href="#about" class="tile tile--about">
-        <span class="tile__title">About Me</span>
-        <div class="tile__hover">
-          Leriia Kalashnikova<br />
-          26 yo<br />
-          4 years experience...
-        </div>
-      </a>
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="mega">Product Designer</h1>
+    </section>
 
-      <!-- Loomy (cover на ховере) -->
-      <a href="#looomy" class="tile tile--media">
-        <div class="media-wrap">
-          <div class="tile__labels"><span class="muted">iOS App</span></div>
-          <span class="tile__title">Loomy</span>
-        </div>
-        <img class="phone" src="assets/iphone-top.png" alt="iPhone top" />
-        <!-- cover, который заполняет всю плитку при наведении -->
-        <img class="media-cover" src="assets/loomy-cover.jpg" alt="Loomy cover" />
-      </a>
-    </div>
+    <!-- Tiles -->
+    <section class="tiles">
+      <!-- Row 1 -->
+      <div class="row row--2">
+        <!-- About Me -->
+        <a href="#about" class="tile tile--about">
+          <span class="tile__title">About Me</span>
+          <div class="tile__hover">
+            Leriia Kalashnikova<br />
+            26 yo<br />
+            4 years experience...
+          </div>
+        </a>
 
-    <!-- Row 2 -->
-    <div class="row row--3">
-      <!-- All Projects -->
-      <a href="#projects" class="tile tile--projects">
-        <span class="tile__title">All<br />Projects</span>
-        <div class="tile__hover">
-          <img src="assets/projects.svg" alt="View Projects" class="projects-icon" />
-          <p class="projects-text">View All Projects</p>
-        </div>
-      </a>
+        <!-- Loomy (cover на ховере) -->
+        <a href="#looomy" class="tile tile--media">
+          <div class="media-wrap">
+            <div class="tile__labels"><span class="muted">iOS App</span></div>
+            <span class="tile__title">Loomy</span>
+          </div>
+          <img class="phone" src="assets/iphone-top.png" alt="iPhone top" />
+          <img class="media-cover" src="assets/loomy-cover.jpg" alt="Loomy cover" />
+        </a>
+      </div>
 
-      <!-- Resume -->
-      <a href="assets/leriia-resume.pdf" download class="tile tile--resume" id="resume">
-        <span class="tile__title">Resume</span>
-        <div class="tile__hover">
-          <img src="assets/download.svg" alt="Download Resume" class="resume-icon" />
-          <p class="resume-text">Download CV</p>
-        </div>
-      </a>
+      <!-- Row 2 -->
+      <div class="row row--3">
+        <!-- All Projects -->
+        <a href="#projects" class="tile tile--projects">
+          <span class="tile__title">All<br />Projects</span>
+          <div class="tile__hover">
+            <img src="assets/projects.svg" alt="View Projects" class="projects-icon" />
+            <p class="projects-text">View All Projects</p>
+          </div>
+        </a>
 
-      <!-- Skills -->
-      <a href="#skills" class="tile tile--skills">
-        <span class="tile__title">Skills</span>
-        <div class="tile__hover">
-          Figma, Sketch, Adobe XD<br />
-          Prototyping & Wireframing<br />
-          UX Research, UI Design
-        </div>
-      </a>
-    </div>
-  </section>
+        <!-- Resume -->
+        <a href="assets/leriia-resume.pdf" download class="tile tile--resume" id="resume">
+          <span class="tile__title">Resume</span>
+          <div class="tile__hover">
+            <img src="assets/download.svg" alt="Download Resume" class="resume-icon" />
+            <p class="resume-text">Download CV</p>
+          </div>
+        </a>
 
-  <!-- Footer -->
-  <footer class="footer container" id="contact">
-    <div class="footer__left">
-      <a class="btn btn--dark" href="mailto:you@example.com">Mail Me</a>
-      <a class="email" href="mailto:you@example.com">you@example.com</a>
-    </div>
-    <div class="footer__right" aria-label="Social links">
-      <a class="icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="assets/instagram.svg" alt="" />
-      </a>
-      <a class="icon" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <img src="assets/linkedin.svg" alt="" />
-      </a>
-    </div>
-  </footer>
+        <!-- Skills -->
+        <a href="#skills" class="tile tile--skills">
+          <span class="tile__title">Skills</span>
+          <div class="tile__hover">
+            Figma, Sketch, Adobe XD<br />
+            Prototyping & Wireframing<br />
+            UX Research, UI Design
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div class="footer__left">
+        <a class="btn btn--dark" href="mailto:you@example.com">Mail Me</a>
+        <a class="email" href="mailto:you@example.com">you@example.com</a>
+      </div>
+      <div class="footer__right" aria-label="Social links">
+        <a class="icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="assets/instagram.svg" alt="" />
+        </a>
+        <a class="icon" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="assets/linkedin.svg" alt="" />
+        </a>
+      </div>
+    </footer>
+
+  </div> <!-- /.page -->
 
   <script src="script.js"></script>
 </body>
