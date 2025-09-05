@@ -57,14 +57,17 @@ a{color: inherit; text-decoration: none}
 .hero{margin: 8px 0 16px; text-align: center;}
 .mega{
   font-weight: 700;
-  font-size: clamp(32px, 8vw, 96px);
+  font-size: clamp(32px, 8vw, 120px);  /* уменьшили диапазон для влезания */
   letter-spacing: -0.02em;
-  line-height: .92;
+  line-height: 1;
   color: #d9d9d9;
   margin: 0;
-  white-space: nowrap;       /* запрещаем перенос */
-  overflow: hidden;          /* предотвращаем появление скролла */
-  text-overflow: ellipsis;   /* если совсем не влезает — обрезка с "…" */
+  white-space: nowrap;      /* одна строка */
+  max-width: var(--page-max); /* ширина как у хедера/футера */
+  padding: 0 24px;          /* такие же отступы */
+  margin-left: auto;        /* центрируем в контейнере */
+  margin-right: auto;
+  text-align: center;
 }
 
 /* ---------- Tiles (FULL-BLEED с отступами) ---------- */
