@@ -18,12 +18,17 @@ body{
   background: var(--bg);
   line-height: 1.5;
 }
+
+/* критично: медиа не должны выпирать за контейнер */
+img, svg, video{max-width:100%; height:auto; display:block}
+
 a{color: inherit; text-decoration: none}
 
-/* Единный контейнер (общая ширина и центр для всех секций) */
+/* Единный контейнер = единый центр для всех секций */
 .container{
   max-width: var(--page-max);
-  margin: 0 auto;                 /* центр по оси */
+  margin-left: auto;
+  margin-right: auto;
   padding-left: var(--gap);
   padding-right: var(--gap);
 }
@@ -52,7 +57,7 @@ a{color: inherit; text-decoration: none}
 .btn--outline{ background: transparent; color: #111; border: 2px solid #111; }
 .btn__icon{ width: 16px; height: 16px; margin-right: 8px; }
 
-/* Hover buttons (общий розовый) */
+/* Hover (розовый) */
 .btn--dark:hover,
 .btn--outline:hover {
   background: var(--accent);
@@ -72,14 +77,14 @@ a{color: inherit; text-decoration: none}
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;                /* центр в пределах того же контейнера */
+  text-align: center; /* центр в пределах того же контейнера */
 }
 
-/* ---------- Tiles (единая ось центра) ---------- */
+/* ---------- Tiles (единый центр с header/footer) ---------- */
 .tiles{ margin: 14px 0 28px; }
 
-/* ОБА ряда используют одну и ту же сетку на 12 колонок,
-   поэтому геометрический центр всегда совпадает с центром контейнера */
+/* ОДНА сетка: и у row--2, и у row--3 12 колонок.
+   Так центр плиток = центр контейнера. */
 .row{
   display: grid;
   gap: var(--gap);
@@ -87,10 +92,8 @@ a{color: inherit; text-decoration: none}
 .row--2{ grid-template-columns: repeat(12, 1fr); margin-bottom: var(--gap); }
 .row--3{ grid-template-columns: repeat(12, 1fr); }
 
-/* Верх: 2 плитки по 6 колонок */
+/* Верх: 2 плитки по 6 колонок; Низ: 3 плитки по 4 */
 .row--2 > .tile{ grid-column: span 6; }
-
-/* Низ: 3 плитки по 4 колонки */
 .row--3 > .tile{ grid-column: span 4; }
 
 /* Плитка */
@@ -104,17 +107,21 @@ a{color: inherit; text-decoration: none}
   text-align: center;
   border: 1px solid #e1e1e1;
   transition: box-shadow .2s ease, transform .06s ease, background .2s ease, color .2s ease;
+  overflow: hidden; /* ничего не выходит за края */
 }
 .tile:hover{ box-shadow: 0 10px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
 .tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
 
-/* Loomy (пример медиа) */
-.tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; }
+/* Loomy */
+.tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; pointer-events:none }
 .muted{ color:#8a8a8a; font-size:14px; }
 .tile--media .tile__title{ margin-top: 28px; }
-.tile--media .phone{ position:absolute; bottom:-40px; left:50%; transform: translateX(-50%); width: 76%; max-width: 520px; }
+.tile--media .phone{
+  position:absolute; bottom:-40px; left:50%; transform: translateX(-50%);
+  width: 76%; max-width: 520px;
+}
 
-/* ---------- Hover-reveal плитки ---------- */
+/* ---------- Hover-reveal tiles ---------- */
 .tile--about, .tile--skills, .tile--resume, .tile--projects{ overflow: hidden; }
 
 /* скрытый слой */
@@ -149,18 +156,16 @@ a{color: inherit; text-decoration: none}
 .tile--resume:hover .tile__hover,
 .tile--projects:hover .tile__hover{ opacity: 1; pointer-events: auto; color: #fff; }
 
-/* About & Skills — текст в левом верхнем углу */
+/* About & Skills — левый верх */
 .tile--about .tile__hover,
 .tile--skills .tile__hover{ align-items: flex-start; justify-content: flex-start; text-align: left; }
 
-/* Resume — по центру: иконка + текст */
-.tile--resume .tile__hover{ align-items: center; justify-content: center; text-align: center; }
-.tile--resume .resume-icon{ width: 64px; height: 64px; margin-bottom: 16px; filter: invert(1); }
-.tile--resume .resume-text{ font-size: 18px; font-weight: 600; color: #fff; }
-
-/* Projects — по центру: иконка + текст */
+/* Resume / Projects — центр: иконка + текст */
+.tile--resume .tile__hover,
 .tile--projects .tile__hover{ align-items: center; justify-content: center; text-align: center; }
-.tile--projects .projects-icon{ width: 56px; height: 56px; margin-bottom: 14px; filter: invert(1); }
+.tile--resume .resume-icon,
+.tile--projects .projects-icon{ width: 64px; height: 64px; margin-bottom: 16px; filter: invert(1); }
+.tile--resume .resume-text,
 .tile--projects .projects-text{ font-size: 18px; font-weight: 600; color: #fff; }
 
 /* Высоты под макет */
@@ -187,7 +192,7 @@ a{color: inherit; text-decoration: none}
   .row--2 > .tile{ grid-column: span 4; }
   .row--3 > .tile{ grid-column: span 2; }
 }
-/* mobile: одна колонка — центр по контейнеру сохраняется */
+/* mobile: одна колонка (центр по контейнеру сохраняется) */
 @media (max-width: 900px){
   .header{ grid-template-columns: 1fr; row-gap: 10px; justify-items: center; }
   .nav{ justify-self: center; }
