@@ -1,21 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leriia Kalashnikova – Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>leriia — Product Designer</title>
+
+  <!-- Font: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
   <!-- Header -->
   <header class="header container">
-    <div class="brand">Leriia Kalashnikova</div>
-    <nav class="nav">
+    <a class="brand" href="#" aria-label="Home">leriia</a>
+    <nav class="nav" aria-label="Main navigation">
+      <!-- Outline button with icon -->
       <a class="btn btn--outline" href="#resume">
-        <img src="assets/resume.svg" alt="" class="btn__icon"> Resume
+        <img src="assets/resume.svg" alt="" class="btn__icon" /> Resume
       </a>
+      <!-- Filled button -->
       <a class="btn btn--dark" href="#contact">Get in Touch</a>
     </nav>
   </header>
@@ -27,32 +33,52 @@
 
   <!-- Tiles -->
   <section class="tiles container">
+    <!-- Row 1: 2 tiles -->
     <div class="row row--2">
-      <div class="tile"><div class="tile__title">Case Study 1</div></div>
-      <div class="tile tile--media">
-        <div class="tile__labels"><span class="muted">App Concept</span></div>
-        <div class="tile__title">Loomy</div>
-        <img src="assets/phone-mockup.png" alt="App mockup" class="phone" />
-      </div>
+      <a href="#about" class="tile">
+        <span class="tile__title">About Me</span>
+      </a>
+
+      <a href="#looomy" class="tile tile--media">
+        <div class="tile__labels"><span class="muted">iOS App</span></div>
+        <span class="tile__title">Loomy</span>
+        <img class="phone" src="assets/iphone-top.png" alt="iPhone top" />
+      </a>
     </div>
+
+    <!-- Row 2: 3 tiles -->
     <div class="row row--3">
-      <div class="tile"><div class="tile__title">Case Study 2</div></div>
-      <div class="tile"><div class="tile__title">Case Study 3</div></div>
-      <div class="tile"><div class="tile__title">Case Study 4</div></div>
+      <a href="#projects" class="tile">
+        <span class="tile__title">All<br />Projects</span>
+      </a>
+
+      <a href="#resume" class="tile">
+        <span class="tile__title">Resume</span>
+      </a>
+
+      <a href="#skills" class="tile">
+        <span class="tile__title">Skills</span>
+      </a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer container">
+  <footer class="footer container" id="contact">
     <div class="footer__left">
-      <span class="email">leriia@example.com</span>
+      <a class="btn btn--dark" href="mailto:you@example.com">Mail Me</a>
+      <a class="email" href="mailto:you@example.com">you@example.com</a>
     </div>
-    <div class="footer__right">
-      <a href="#" class="icon"><img src="assets/github.svg" alt="GitHub"></a>
-      <a href="#" class="icon"><img src="assets/linkedin.svg" alt="LinkedIn"></a>
-      <a href="#" class="icon"><img src="assets/dribbble.svg" alt="Dribbble"></a>
+    <div class="footer__right" aria-label="Social links">
+      <a class="icon" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="assets/instagram.svg" alt="" />
+      </a>
+      <a class="icon" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img src="assets/linkedin.svg" alt="" />
+      </a>
     </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="script.js"></script>
 </body>
 </html>
