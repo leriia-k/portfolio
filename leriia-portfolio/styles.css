@@ -7,6 +7,7 @@
   --muted: #6a6a6a;
   --tile: #e6e6e6;
   --gap: 24px;
+  --accent: #ff4fa3; /* розовый акцент */
 }
 
 *{box-sizing:border-box}
@@ -17,10 +18,9 @@ body{
   background: var(--bg);
   line-height: 1.5;
 }
-
 a{color: inherit; text-decoration: none}
 
-/* Единый контейнер для боковых отступов всех секций */
+/* Единый контейнер — одинаковые боковые отступы для всех секций */
 .container{
   max-width: var(--page-max);
   margin: 0 auto;
@@ -33,7 +33,7 @@ a{color: inherit; text-decoration: none}
   display: grid;
   grid-template-columns: 1fr auto; /* слева бренд, справа навигация */
   align-items: center;
-  padding: 20px 0; /* только вертикальные — боковые задаёт .container */
+  padding: 20px 0;
 }
 .brand{
   justify-self: start;
@@ -58,59 +58,52 @@ a{color: inherit; text-decoration: none}
 }
 .btn:active{ transform: translateY(1px) }
 .btn--dark{ background:#111; color:#fff; }
-.btn--dark:hover{ background:#000; }
+.btn--outline{ background: transparent; color: #111; border: 2px solid #111; }
+.btn__icon{ width: 16px; height: 16px; margin-right: 8px; display:inline-block; vertical-align: middle; }
 
-.btn--outline{
-  background: transparent;
-  color: #111;
-  border: 2px solid #111;
-}
-.btn--outline:hover{
-  background: #111;
+/* Hover для всех кнопок */
+.btn--dark:hover,
+.btn--outline:hover {
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
-}
-.btn__icon{
-  width: 16px; height: 16px;
-  margin-right: 8px;
-  display:inline-block;
-  vertical-align: middle;
 }
 
 /* ---------- Hero ---------- */
 .hero{ margin: 8px 0 16px; }
 .mega{
   font-weight: 700;
-  font-size: clamp(32px, 8vw, 120px); /* адаптивный размер */
+  font-size: clamp(32px, 8vw, 120px);
   letter-spacing: -0.02em;
   line-height: 1;
   color: #d9d9d9;
   margin: 0;
-
-  white-space: nowrap;        /* одна строка */
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;         /* центр текста внутри контейнера */
+  text-align: center;
 }
 
 /* ---------- Tiles ---------- */
 .tiles{ margin: 14px 0 28px; }
 
+/* ЕДИНАЯ сетка с равными промежутками */
 .row{
   display: grid;
-  column-gap: var(--gap);
-  row-gap: var(--gap);
+  gap: var(--gap);
 }
 
-/* Ряд 1: 2 равные колонки в пределах контейнера */
+/* Desktop: 6 колонок */
 .row--2{
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   margin-bottom: var(--gap);
 }
+.row--2 > .tile{ grid-column: span 3; }
 
-/* Ряд 2: 3 равные колонки */
 .row--3{
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
+.row--3 > .tile{ grid-column: span 2; }
 
 /* Карточка */
 .tile{
@@ -126,21 +119,11 @@ a{color: inherit; text-decoration: none}
 }
 .tile:hover{ box-shadow: 0 10px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
 
-.tile__title{
-  font-size: clamp(18px, 1.3vw + 14px, 28px);
-  font-weight: 500;
-}
+.tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
 
 /* Медиа-карточка Loomy */
-.tile--media{
-  overflow:hidden;
-  align-items:flex-start;
-  justify-content:center;
-}
-.tile--media .tile__labels{
-  position:absolute; top:18px; width:100%;
-  display:flex; justify-content:center;
-}
+.tile--media{ overflow:hidden; align-items:flex-start; justify-content:center; }
+.tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; }
 .muted{ color:#8a8a8a; font-size:14px; }
 .tile--media .tile__title{ margin-top: 28px; }
 .tile--media .phone{
@@ -148,17 +131,17 @@ a{color: inherit; text-decoration: none}
   width: 76%; max-width: 520px;
 }
 
-/* Высоты по рядам (как в макете) */
+/* Высоты */
 .row--2 .tile{ min-height: 340px; }
 .row--3 .tile{ min-height: 240px; }
 
 /* ---------- Footer ---------- */
 .footer{
   display:grid;
-  grid-template-columns: 1fr auto; /* лево / право */
+  grid-template-columns: 1fr auto;
   align-items:center;
   gap: 16px;
-  padding: 24px 0 40px; /* только вертикальные — боковые задаёт .container */
+  padding: 24px 0 40px;
 }
 .footer__left{
   justify-self: start;
@@ -180,25 +163,19 @@ a{color: inherit; text-decoration: none}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px){
-  /* три колонки превращаем в две чуть раньше, чтобы сохранялась ритмика */
-  .row--3{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row--2, .row--3{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .row--2 > .tile{ grid-column: span 2; }
+  .row--3 > .tile{ grid-column: span 2; }
 }
+
 @media (max-width: 900px){
-  .header{
-    grid-template-columns: 1fr;
-    row-gap: 10px;
-    justify-items: center;
-  }
+  .header{ grid-template-columns: 1fr; row-gap: 10px; justify-items: center; }
   .nav{ justify-self: center; }
 
-  .row--2{ grid-template-columns: 1fr; }
-  .row--3{ grid-template-columns: 1fr; }
+  .row--2, .row--3{ grid-template-columns: 1fr; }
+  .row--2 > .tile, .row--3 > .tile{ grid-column: auto; }
   .row--2 .tile{ min-height: 260px; }
 
-  .footer{
-    grid-template-columns: 1fr;
-    justify-items:center;
-    row-gap:12px;
-  }
+  .footer{ grid-template-columns: 1fr; justify-items:center; row-gap:12px; }
   .footer__left, .footer__right{ justify-self:center; }
 }
