@@ -20,7 +20,7 @@ body{
 }
 a{color: inherit; text-decoration: none}
 
-/* Единый контейнер — одинаковые боковые отступы для всех секций */
+/* Единый контейнер — одинаковые боковые отступы */
 .container{
   max-width: var(--page-max);
   margin: 0 auto;
@@ -31,7 +31,7 @@ a{color: inherit; text-decoration: none}
 /* ---------- Header ---------- */
 .header{
   display: grid;
-  grid-template-columns: 1fr auto; /* слева бренд, справа навигация */
+  grid-template-columns: 1fr auto;
   align-items: center;
   padding: 20px 0;
 }
@@ -87,19 +87,16 @@ a{color: inherit; text-decoration: none}
 /* ---------- Tiles ---------- */
 .tiles{ margin: 14px 0 28px; }
 
-/* ЕДИНАЯ сетка с равными промежутками */
+/* ЕДИНАЯ сетка */
 .row{
   display: grid;
   gap: var(--gap);
 }
-
-/* Desktop: 6 колонок */
 .row--2{
   grid-template-columns: repeat(6, minmax(0, 1fr));
   margin-bottom: var(--gap);
 }
 .row--2 > .tile{ grid-column: span 3; }
-
 .row--3{
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
@@ -121,7 +118,7 @@ a{color: inherit; text-decoration: none}
 
 .tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
 
-/* Медиа-карточка Loomy */
+/* Медиа-карточка */
 .tile--media{ overflow:hidden; align-items:flex-start; justify-content:center; }
 .tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; }
 .muted{ color:#8a8a8a; font-size:14px; }
@@ -130,6 +127,28 @@ a{color: inherit; text-decoration: none}
   position:absolute; bottom:-40px; left:50%; transform: translateX(-50%);
   width: 76%; max-width: 520px;
 }
+
+/* About Me hover effect */
+.tile--about{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.tile--about .tile__hover{
+  position: absolute;
+  inset: 0;
+  padding: 40px;
+  text-align: left;
+  display: none;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #111;
+}
+.tile--about:hover .tile__title{ display: none; }
+.tile--about:hover .tile__hover{ display: block; }
 
 /* Высоты */
 .row--2 .tile{ min-height: 340px; }
