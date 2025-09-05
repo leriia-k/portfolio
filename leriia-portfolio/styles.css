@@ -97,15 +97,17 @@ a{color: inherit; text-decoration: none}
 .tile:hover{ box-shadow: 0 10px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
 .tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
 
-/* Loomy tile */
+/* Loomy */
 .tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; }
 .muted{ color:#8a8a8a; font-size:14px; }
 .tile--media .tile__title{ margin-top: 28px; }
 .tile--media .phone{ position:absolute; bottom:-40px; left:50%; transform: translateX(-50%); width: 76%; max-width: 520px; }
 
 /* About Me */
-.tile--about{ overflow: hidden; }
-.tile--about .tile__hover{
+.tile--about, .tile--skills, .tile--resume{ overflow: hidden; }
+.tile--about .tile__hover,
+.tile--skills .tile__hover,
+.tile--resume .tile__hover{
   position: absolute; inset: 0;
   padding: 40px;
   text-align: left;
@@ -113,27 +115,30 @@ a{color: inherit; text-decoration: none}
   font-size: 18px; font-weight: 500; line-height: 1.4;
   color: #111;
   transition: opacity .15s ease, color .15s ease;
+  display: flex; align-items: flex-start; justify-content: flex-start;
 }
-.tile--about .tile__title{ transition: opacity .15s ease; }
-.tile--about:hover .tile__title{ opacity: 0; }
-.tile--about:hover .tile__hover{ opacity: 1; pointer-events: auto; color: #fff; }
-.tile--about:hover{ background:#111; }
+.tile--about .tile__title,
+.tile--skills .tile__title,
+.tile--resume .tile__title{ transition: opacity .15s ease; }
 
-/* Skills */
-.tile--skills{ overflow: hidden; }
-.tile--skills .tile__hover{
-  position: absolute; inset: 0;
-  padding: 40px;
-  text-align: left;
-  opacity: 0; pointer-events: none;
-  font-size: 18px; font-weight: 500; line-height: 1.4;
-  color: #111;
-  transition: opacity .15s ease, color .15s ease;
+/* Hover behavior */
+.tile--about:hover,
+.tile--skills:hover,
+.tile--resume:hover{ background:#111; }
+.tile--about:hover .tile__title,
+.tile--skills:hover .tile__title,
+.tile--resume:hover .tile__title{ opacity: 0; }
+.tile--about:hover .tile__hover,
+.tile--skills:hover .tile__hover,
+.tile--resume:hover .tile__hover{ opacity: 1; pointer-events: auto; color: #fff; }
+
+/* Resume icon */
+.tile--resume .resume-icon{
+  width: 48px;
+  height: 48px;
+  margin-top: 0;
+  filter: invert(1);
 }
-.tile--skills .tile__title{ transition: opacity .15s ease; }
-.tile--skills:hover .tile__title{ opacity: 0; }
-.tile--skills:hover .tile__hover{ opacity: 1; pointer-events: auto; color: #fff; }
-.tile--skills:hover{ background:#111; }
 
 /* Heights */
 .row--2 .tile{ min-height: 340px; }
