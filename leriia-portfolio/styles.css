@@ -8,6 +8,7 @@
   --tile: #e6e6e6;
   --gap: 24px;
   --accent: #ff4fa3;
+  --loomy-bg:#1a161c;
 }
 
 *{box-sizing:border-box}
@@ -18,24 +19,16 @@ body{
   background: var(--bg);
   line-height: 1.5;
 }
-
-/* не даём медиа раздвигать контейнер */
 img, svg, video{max-width:100%; height:auto; display:block}
-
 a{color: inherit; text-decoration: none}
 
-/* ---------- ЕДИНЫЙ КОНТЕЙНЕР ДЛЯ ВСЕХ СЕКЦИЙ ---------- */
-/* Жёстко прибиваем одну ширину/центр, перекрывая старые правила */
-.container,
-.hero.container,
-.tiles.container,
-.header.container,
-.footer.container{
-  max-width: var(--page-max) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: var(--gap) !important;
-  padding-right: var(--gap) !important;
+/* Container */
+.container{
+  max-width: var(--page-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gap);
+  padding-right: var(--gap);
 }
 
 /* ---------- Header ---------- */
@@ -82,25 +75,20 @@ a{color: inherit; text-decoration: none}
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;  /* центр в том же контейнере */
+  text-align: center;
 }
 
-/* ---------- Tiles (единый центр как у header/footer) ---------- */
+/* ---------- Tiles ---------- */
 .tiles{ margin: 14px 0 28px; }
 
-/* одна сетка на 12 колонок для обоих рядов */
-.row{
-  display: grid;
-  gap: var(--gap);
-}
+/* одна сетка для совпадения центра с header/footer */
+.row{ display: grid; gap: var(--gap); }
 .row--2{ grid-template-columns: repeat(12, 1fr); margin-bottom: var(--gap); }
 .row--3{ grid-template-columns: repeat(12, 1fr); }
-
-/* Верх: 2 плитки по 6; Низ: 3 плитки по 4 */
 .row--2 > .tile{ grid-column: span 6; }
 .row--3 > .tile{ grid-column: span 4; }
 
-/* Плитка */
+/* Базовая плитка */
 .tile{
   background: var(--tile);
   border-radius: var(--radius);
@@ -116,19 +104,75 @@ a{color: inherit; text-decoration: none}
 .tile:hover{ box-shadow: 0 10px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
 .tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
 
-/* Loomy */
-.tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; pointer-events:none }
-.muted{ color:#8a8a8a; font-size:14px; }
-.tile--media .tile__title{ margin-top: 28px; }
+/* ---------- Loomy (позиционирование + cover на hover) ---------- */
+.tile--media{
+  background: var(--loomy-bg);
+  color: #fff;
+  align-items: flex-start;
+  justify-content: center;
+}
+.tile--media .media-wrap{
+  width: 100%;
+  height: 100%;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 1;
+}
+.tile--media .tile__labels{
+  position: static;
+  width: auto;
+  margin-bottom: 6px;
+}
+.tile--media .muted{
+  color: rgba(255,255,255,.6);
+  font-size: 14px;
+  letter-spacing: .2px;
+}
+.tile--media .tile__title{
+  margin: 0;
+  font-size: clamp(20px, 1.2vw + 16px, 30px);
+  font-weight: 600;
+  color: rgba(255,255,255,.94);
+}
 .tile--media .phone{
-  position:absolute; bottom:-40px; left:50%; transform: translateX(-50%);
-  width: 76%; max-width: 520px;
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  bottom:-18px;
+  width: min(92%, 640px);
+  z-index: 1;
 }
 
-/* ---------- Hover-reveal tiles ---------- */
-.tile--about, .tile--skills, .tile--resume, .tile--projects{ overflow: hidden; }
+/* cover, заполняющий всю плитку при наведении */
+.tile--media .media-cover{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 2;
+  pointer-events: none;
+  /* если нужна лёгкая затемняющая маска поверх cover, добавь filter: brightness(.96); */
+}
 
-/* скрытый слой */
+/* на hover — скрываем текст/телефон и показываем cover */
+.tile--media:hover .media-wrap,
+.tile--media:hover .phone{
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.tile--media:hover .media-cover{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- Hover-reveal плитки (About, Skills, Resume, Projects) ---------- */
+.tile--about, .tile--skills, .tile--resume, .tile--projects{ overflow: hidden; }
 .tile--about .tile__hover,
 .tile--skills .tile__hover,
 .tile--resume .tile__hover,
@@ -146,7 +190,6 @@ a{color: inherit; text-decoration: none}
 .tile--resume .tile__title,
 .tile--projects .tile__title{ transition: opacity .15s ease; }
 
-/* общее поведение при наведении */
 .tile--about:hover,
 .tile--skills:hover,
 .tile--resume:hover,
@@ -164,7 +207,7 @@ a{color: inherit; text-decoration: none}
 .tile--about .tile__hover,
 .tile--skills .tile__hover{ align-items: flex-start; justify-content: flex-start; text-align: left; }
 
-/* Resume / Projects — центр: иконка + текст */
+/* Resume / Projects — по центру */
 .tile--resume .tile__hover,
 .tile--projects .tile__hover{ align-items: center; justify-content: center; text-align: center; }
 .tile--resume .resume-icon,
@@ -172,7 +215,7 @@ a{color: inherit; text-decoration: none}
 .tile--resume .resume-text,
 .tile--projects .projects-text{ font-size: 18px; font-weight: 600; color: #fff; }
 
-/* Высоты под макет */
+/* Высоты */
 .row--2 .tile{ min-height: 340px; }
 .row--3 .tile{ min-height: 240px; }
 
