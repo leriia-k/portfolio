@@ -61,8 +61,11 @@ html, body{overflow-x:hidden}
 .btn--dark:hover, .btn--outline:hover{ background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* ---------- Hero ---------- */
-.hero{ margin: 8px 0 16px; }
-.mega{
+.hero {
+  margin: 8px 0 40px; /* было 8px 0 16px — добавили больше отступа снизу */
+}
+
+.mega {
   font-weight: 700;
   font-size: clamp(28px, 7.2vw, 110px);
   letter-spacing: -0.02em;
@@ -76,27 +79,67 @@ html, body{overflow-x:hidden}
 }
 
 /* ---------- Tiles ---------- */
-.tiles{ margin: 14px 0 28px; }
-.row{ display: grid; gap: var(--gap); }
-.row--2{ grid-template-columns: repeat(12, 1fr); margin-bottom: var(--gap); }
-.row--3{ grid-template-columns: repeat(12, 1fr); }
-.row--2 > .tile{ grid-column: span 6; }
-.row--3 > .tile{ grid-column: span 4; }
+.tiles {
+  margin: 14px 0 28px;
+}
 
-.tile{
+.row {
+  display: grid;
+  gap: var(--gap);
+}
+
+.row--2 {
+  grid-template-columns: repeat(12, 1fr);
+  margin-bottom: var(--gap);
+}
+
+.row--3 {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.row--2 > .tile {
+  grid-column: span 6;
+}
+
+.row--3 > .tile {
+  grid-column: span 4;
+}
+
+.tile {
   background: var(--tile);
   border-radius: var(--radius);
   min-height: 260px;
-  display:flex; align-items:center; justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   padding: 28px;
   text-align: center;
   border: 1px solid #e1e1e1;
-  transition: box-shadow .2s ease, transform .06s ease, background .2s ease, color .2s ease, opacity .2s;
+  transition: box-shadow .2s ease, transform .06s ease,
+              background .2s ease, color .2s ease, opacity .2s;
   overflow: hidden;
 }
-.tile:hover{ box-shadow: 0 10px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
-.tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
+
+.tile:hover {
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+  transform: translateY(-2px);
+}
+
+.tile__title {
+  font-size: clamp(18px, 1.3vw + 14px, 28px);
+  font-weight: 500;
+}
+
+/* верхний ряд — уменьшенная высота */
+.row--2 .tile {
+  min-height: 300px; /* было 340px */
+}
+
+/* нижний ряд */
+.row--3 .tile {
+  min-height: 240px;
+}
 
 /* ---------- Loomy ---------- */
 .tile--media{
