@@ -61,7 +61,7 @@ a{color: inherit; text-decoration: none}
 .btn--outline{ background: transparent; color: #111; border: 2px solid #111; }
 .btn__icon{ width: 16px; height: 16px; margin-right: 8px; display:inline-block; vertical-align: middle; }
 
-/* Hover для всех кнопок */
+/* Hover для всех кнопок (в т.ч. Mail Me в футере) */
 .btn--dark:hover,
 .btn--outline:hover {
   background: var(--accent);
@@ -102,13 +102,13 @@ a{color: inherit; text-decoration: none}
 }
 .row--3 > .tile{ grid-column: span 2; }
 
-/* Карточка */
+/* Карточка (по умолчанию контент по центру) */
 .tile{
   background: var(--tile);
   border-radius: var(--radius);
   min-height: 260px;
   display:flex; align-items:center; justify-content:center;
-  position: relative;
+  position: relative; /* важно для абсолютного слоя у About */
   padding: 28px;
   text-align: center;
   border: 1px solid #e1e1e1;
@@ -118,7 +118,7 @@ a{color: inherit; text-decoration: none}
 
 .tile__title{ font-size: clamp(18px, 1.3vw + 14px, 28px); font-weight: 500; }
 
-/* Медиа-карточка */
+/* Медиа-карточка Loomy */
 .tile--media{ overflow:hidden; align-items:flex-start; justify-content:center; }
 .tile--media .tile__labels{ position:absolute; top:18px; width:100%; display:flex; justify-content:center; }
 .muted{ color:#8a8a8a; font-size:14px; }
@@ -128,27 +128,37 @@ a{color: inherit; text-decoration: none}
   width: 76%; max-width: 520px;
 }
 
-/* About Me hover effect */
+/* ---------- About Me: hover-переход к левому верхнему тексту ---------- */
 .tile--about{
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
   overflow: hidden;
 }
+
+/* Слой с данными: фиксируем в левом верхнем углу, даём отступы 40px */
 .tile--about .tile__hover{
   position: absolute;
-  inset: 0;
+  inset: 0;                 /* слой на всю плитку */
   padding: 40px;
   text-align: left;
-  display: none;
+  display: block;           /* всегда в DOM, но невидим */
+  opacity: 0;               /* скрыт */
+  pointer-events: none;     /* не перехватывает клики до hover */
+  z-index: 1;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.4;
   color: #111;
+  transition: opacity .15s ease;
 }
-.tile--about:hover .tile__title{ display: none; }
-.tile--about:hover .tile__hover{ display: block; }
+
+/* Прячем центрированный заголовок и показываем левый верхний текст */
+.tile--about .tile__title{
+  transition: opacity .15s ease;
+}
+.tile--about:hover .tile__title{ opacity: 0; }
+.tile--about:hover .tile__hover{
+  opacity: 1;
+  pointer-events: auto;
+}
 
 /* Высоты */
 .row--2 .tile{ min-height: 340px; }
@@ -186,7 +196,6 @@ a{color: inherit; text-decoration: none}
   .row--2 > .tile{ grid-column: span 2; }
   .row--3 > .tile{ grid-column: span 2; }
 }
-
 @media (max-width: 900px){
   .header{ grid-template-columns: 1fr; row-gap: 10px; justify-items: center; }
   .nav{ justify-self: center; }
