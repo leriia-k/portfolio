@@ -34,59 +34,94 @@
     <section class="tiles">
       <!-- Row 1 -->
       <div class="row row--2">
-        <!-- About Me -->
-        <div class="tile tile--about">
+        <!-- About Me (теперь кликается вся плитка + кнопка More) -->
+        <div class="tile tile--about"
+             data-modal="#about-modal"
+             aria-haspopup="dialog"
+             aria-controls="about-modal"
+             aria-label="Open About modal">
           <span class="tile__title">About Me</span>
           <div class="tile__hover">
             Leriia Kalashnikova<br />
             26 yo<br />
             4 years experience...
-            <button type="button" class="more-btn" data-modal="#about-modal">More</button>
+            <button type="button"
+                    class="more-btn"
+                    data-modal="#about-modal"
+                    aria-haspopup="dialog"
+                    aria-controls="about-modal"
+                    aria-label="Open About modal">
+              More
+            </button>
           </div>
         </div>
 
-        <!-- Loomy -->
-        <div class="tile tile--media">
+        <!-- Loomy (теперь кликается вся плитка + кнопка-глаз) -->
+        <div class="tile tile--media"
+             data-modal="#loomy-modal"
+             aria-haspopup="dialog"
+             aria-controls="loomy-modal"
+             aria-label="Open Loomy modal">
           <div class="media-wrap">
             <div class="tile__labels"><span class="muted">iOS App</span></div>
             <span class="tile__title">Loomy</span>
           </div>
           <img class="phone" src="assets/iphone-top.png" alt="" />
           <img class="media-cover" src="assets/loomy-cover.jpg" alt="" />
-          <button type="button" class="more-btn icon-btn" data-modal="#loomy-modal" aria-label="Open Loomy">
-            <img src="assets/eye.svg" alt="eye icon" />
+          <button type="button"
+                  class="more-btn icon-btn"
+                  data-modal="#loomy-modal"
+                  aria-haspopup="dialog"
+                  aria-controls="loomy-modal"
+                  aria-label="Open Loomy modal">
+            <img src="assets/eye.svg" alt="" />
           </button>
         </div>
       </div>
 
       <!-- Row 2 -->
       <div class="row row--3">
-        <!-- All Projects -->
-        <button type="button" class="tile tile--projects" data-modal="#projects-modal">
+        <!-- All Projects (как и было — кликабельная плитка) -->
+        <button type="button" class="tile tile--projects"
+                data-modal="#projects-modal"
+                aria-haspopup="dialog"
+                aria-controls="projects-modal"
+                aria-label="Open projects modal">
           <span class="tile__title">All<br />Projects</span>
           <div class="tile__hover">
-            <img src="assets/projects.svg" class="projects-icon" />
+            <img src="assets/projects.svg" class="projects-icon" alt="" />
             <p class="projects-text">View All Projects</p>
           </div>
         </button>
 
-        <!-- Resume -->
+        <!-- Resume (скачивание) -->
         <a href="assets/leriia-resume.pdf" download class="tile tile--resume" id="resume">
           <span class="tile__title">Resume</span>
           <div class="tile__hover">
-            <img src="assets/download.svg" class="resume-icon" />
+            <img src="assets/download.svg" class="resume-icon" alt="" />
             <p class="resume-text">Download CV</p>
           </div>
         </a>
 
-        <!-- Skills -->
-        <div class="tile tile--skills" id="skills">
+        <!-- Skills (теперь кликается вся плитка + кнопка More) -->
+        <div class="tile tile--skills" id="skills"
+             data-modal="#skills-modal"
+             aria-haspopup="dialog"
+             aria-controls="skills-modal"
+             aria-label="Open skills modal">
           <span class="tile__title">Skills</span>
           <div class="tile__hover">
             Figma, Sketch, Adobe XD<br />
             Prototyping & Wireframing<br />
             UX Research, UI Design
-            <button type="button" class="more-btn" data-modal="#skills-modal">More</button>
+            <button type="button"
+                    class="more-btn"
+                    data-modal="#skills-modal"
+                    aria-haspopup="dialog"
+                    aria-controls="skills-modal"
+                    aria-label="Open skills modal">
+              More
+            </button>
           </div>
         </div>
       </div>
@@ -99,92 +134,117 @@
         <a class="email" href="mailto:you@example.com">you@example.com</a>
       </div>
       <div class="footer__right">
-        <a class="icon" href="#"><img src="assets/instagram.svg" /></a>
-        <a class="icon" href="#"><img src="assets/linkedin.svg" /></a>
+        <a class="icon" href="#"><img src="assets/instagram.svg" alt="" /></a>
+        <a class="icon" href="#"><img src="assets/linkedin.svg" alt="" /></a>
       </div>
     </footer>
   </div>
 
   <!-- ---------- About modal ---------- -->
-  <div class="modal" id="about-modal">
+  <div class="modal" id="about-modal" role="dialog" aria-modal="true" aria-label="About Me" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
-    <div class="modal__sheet">
-      <button class="modal__close" type="button" data-close="modal">✕</button>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
       <header class="modal__header">
         <h2 class="modal__title">About Me</h2>
+        <p class="modal__subtitle">Short bio & images</p>
       </header>
       <section class="modal__content">
         <div class="gallery">
-          <img src="assets/loomy-slide-1.jpg" />
-          <img src="assets/loomy-slide-2.jpg" />
+          <img src="assets/loomy-slide-1.jpg" alt="" />
+          <img src="assets/loomy-slide-2.jpg" alt="" />
         </div>
       </section>
     </div>
   </div>
 
   <!-- ---------- Loomy modal ---------- -->
-  <div class="modal" id="loomy-modal">
+  <div class="modal" id="loomy-modal" role="dialog" aria-modal="true" aria-label="Loomy case" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
-    <div class="modal__sheet">
-      <button class="modal__close" type="button" data-close="modal">✕</button>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
       <header class="modal__header">
         <h2 class="modal__title">Loomy — iOS App</h2>
+        <p class="modal__subtitle">Case study / preview area</p>
       </header>
       <section class="modal__content">
         <div class="gallery">
-          <img src="assets/loomy-slide-1.jpg" />
-          <img src="assets/loomy-slide-2.jpg" />
+          <img src="assets/loomy-slide-1.jpg" alt="" />
+          <img src="assets/loomy-slide-2.jpg" alt="" />
         </div>
       </section>
     </div>
   </div>
 
   <!-- ---------- Skills modal ---------- -->
-  <div class="modal" id="skills-modal">
+  <div class="modal" id="skills-modal" role="dialog" aria-modal="true" aria-label="Skills" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
-    <div class="modal__sheet">
-      <button class="modal__close" type="button" data-close="modal">✕</button>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
       <header class="modal__header">
         <h2 class="modal__title">Skills</h2>
+        <p class="modal__subtitle">Toolset & examples</p>
       </header>
       <section class="modal__content">
         <div class="gallery">
-          <img src="assets/projects-slide-1.jpg" />
-          <img src="assets/projects-slide-2.jpg" />
+          <img src="assets/projects-slide-1.jpg" alt="" />
+          <img src="assets/projects-slide-2.jpg" alt="" />
         </div>
       </section>
     </div>
   </div>
 
   <!-- ---------- Projects modal ---------- -->
-  <div class="modal" id="projects-modal">
+  <div class="modal" id="projects-modal" role="dialog" aria-modal="true" aria-label="All projects" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
-    <div class="modal__sheet">
-      <button class="modal__close" type="button" data-close="modal">✕</button>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
       <header class="modal__header">
         <h2 class="modal__title">All Projects</h2>
+        <p class="modal__subtitle">Portfolio overview / slides area</p>
       </header>
       <section class="modal__content">
         <div class="gallery">
-          <img src="assets/projects-slide-1.jpg" />
-          <img src="assets/projects-slide-2.jpg" />
+          <img src="assets/projects-slide-1.jpg" alt="" />
+          <img src="assets/projects-slide-2.jpg" alt="" />
         </div>
       </section>
     </div>
   </div>
 
-  <!-- ---------- JS for modals ---------- -->
+  <!-- JS -->
   <script>
     (function(){
-      function openModal(m){ if(!m) return; m.classList.add('is-open'); document.documentElement.style.overflow='hidden'; }
-      function closeModal(m){ if(!m) return; m.classList.remove('is-open'); document.documentElement.style.overflow=''; }
+      function openModal(m){
+        if(!m) return;
+        m.classList.add('is-open');
+        m.removeAttribute('aria-hidden');
+        document.documentElement.style.overflow='hidden';
+      }
+      function closeModal(m){
+        if(!m) return;
+        m.classList.remove('is-open');
+        m.setAttribute('aria-hidden','true');
+        document.documentElement.style.overflow='';
+      }
+
       document.addEventListener('click', e=>{
-        const t=e.target.closest('[data-modal]');
-        if(t){ const m=document.querySelector(t.dataset.modal); openModal(m); }
-        if(e.target.dataset.close==='modal'){ closeModal(e.target.closest('.modal')); }
+        const t = e.target.closest('[data-modal]');
+        if(t){
+          const sel = t.getAttribute('data-modal');
+          const m = document.querySelector(sel);
+          openModal(m);
+        }
+        if(e.target.dataset.close==='modal'){
+          closeModal(e.target.closest('.modal'));
+        }
       });
+
       document.addEventListener('keydown', e=>{
-        if(e.key==='Escape'){ closeModal(document.querySelector('.modal.is-open')); }
+        if(e.key==='Escape'){
+          const open = document.querySelector('.modal.is-open');
+          closeModal(open);
+        }
       });
     })();
   </script>
