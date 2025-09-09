@@ -141,9 +141,6 @@
     <div class="modal__backdrop" data-close="modal"></div>
     <div class="modal__sheet" role="document" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
-      <header class="modal__header">
-        <h2 class="modal__title">About Me</h2>
-      </header>
       <section class="modal__content">
         <div class="gallery">
           <img src="assets/loomy-slide-1.jpg" alt="" />
@@ -153,22 +150,32 @@
     </div>
   </div>
 
-  <!-- ---------- Loomy modal (fullscreen) ---------- -->
+  <!-- ---------- Loomy modal (fullscreen, 14 слайдов; #2 — видео) ---------- -->
   <div class="modal" id="loomy-modal" role="dialog" aria-modal="true" aria-label="Loomy case" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
     <div class="modal__sheet loomy-sheet" role="document" tabindex="-1">
-      <!-- close button in top-right -->
+      <!-- только кнопка закрытия вверху -->
       <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
 
-      <header class="modal__header">
-        <h2 class="modal__title">Loomy — iOS App</h2>
-      </header>
-
       <section class="modal__content loomy-content">
-        <div class="gallery">
+        <div class="gallery gallery--loomy">
+          <!-- 1 -->
           <img src="assets/loomy-slide-1.jpg" alt="Loomy slide 1" />
-          <img src="assets/loomy-slide-2.jpg" alt="Loomy slide 2" />
-          <!-- добавляй новые слайды просто как <img> ниже -->
+          <!-- 2 — видео -->
+          <video class="loomy-video" src="assets/loomy-slide-2.mp4" controls playsinline preload="metadata" poster="assets/loomy-slide-2-poster.jpg"></video>
+          <!-- 3..14 -->
+          <img src="assets/loomy-slide-3.jpg" alt="Loomy slide 3" />
+          <img src="assets/loomy-slide-4.jpg" alt="Loomy slide 4" />
+          <img src="assets/loomy-slide-5.jpg" alt="Loomy slide 5" />
+          <img src="assets/loomy-slide-6.jpg" alt="Loomy slide 6" />
+          <img src="assets/loomy-slide-7.jpg" alt="Loomy slide 7" />
+          <img src="assets/loomy-slide-8.jpg" alt="Loomy slide 8" />
+          <img src="assets/loomy-slide-9.jpg" alt="Loomy slide 9" />
+          <img src="assets/loomy-slide-10.jpg" alt="Loomy slide 10" />
+          <img src="assets/loomy-slide-11.jpg" alt="Loomy slide 11" />
+          <img src="assets/loomy-slide-12.jpg" alt="Loomy slide 12" />
+          <img src="assets/loomy-slide-13.jpg" alt="Loomy slide 13" />
+          <img src="assets/loomy-slide-14.jpg" alt="Loomy slide 14" />
         </div>
       </section>
     </div>
@@ -179,9 +186,6 @@
     <div class="modal__backdrop" data-close="modal"></div>
     <div class="modal__sheet" role="document" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
-      <header class="modal__header">
-        <h2 class="modal__title">Skills</h2>
-      </header>
       <section class="modal__content">
         <div class="gallery">
           <img src="assets/projects-slide-1.jpg" alt="" />
@@ -196,9 +200,6 @@
     <div class="modal__backdrop" data-close="modal"></div>
     <div class="modal__sheet" role="document" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
-      <header class="modal__header">
-        <h2 class="modal__title">All Projects</h2>
-      </header>
       <section class="modal__content">
         <div class="gallery">
           <img src="assets/projects-slide-1.jpg" alt="" />
@@ -222,6 +223,8 @@
         m.classList.remove('is-open');
         m.setAttribute('aria-hidden','true');
         document.documentElement.style.overflow='';
+        // стопаем видео при закрытии, чтобы не играло в фоне
+        m.querySelectorAll('video').forEach(v=>{ try{ v.pause(); }catch(e){} });
       }
 
       document.addEventListener('click', e=>{
