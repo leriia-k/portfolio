@@ -193,3 +193,65 @@ a{color:inherit;text-decoration:none}
   .row--2>.tile,.row--3>.tile{grid-column:auto}
   .modal__sheet{margin:16px auto;max-height:92vh}
 }
+
+/* ===== Modal sizing tune-up ===== */
+:root{
+  --modal-max-w: 1240px;   /* макс. ширина контента модалки */
+  --modal-vpad: 28px;      /* вертикальные паддинги модалки */
+  --modal-hpad: 28px;      /* горизонтальные паддинги модалки */
+  --modal-header-h: 96px;  /* примерная высота шапки модалки (title+subtitle+отступы) */
+}
+
+/* ширина «листа» модалки */
+.modal__sheet{
+  max-width: var(--modal-max-w);
+  width: calc(100% - 2 * var(--gap));
+}
+
+/* контент модалки — прокручиваемый, с умным лимитом по высоте */
+.modal__content{
+  padding: 0 var(--modal-hpad) var(--modal-vpad);
+  /* запас по высоте: окно 90vh минус высота шапки и нижний паддинг */
+  max-height: calc(90vh - var(--modal-header-h) - var(--modal-vpad));
+  overflow: auto;
+}
+
+/* галерея слайдов: один за другим (можно переключить на 2-колонки при желании) */
+.gallery{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr; /* всегда одна колонка = один крупный слайд в ряд */
+}
+
+/* сами изображения: вписываются целиком, без обрезки */
+.gallery img{
+  width: 100%;
+  height: auto;              /* по умолчанию авто-высота, сохраняем пропорции */
+  max-height: calc(90vh - var(--modal-header-h) - var(--modal-vpad) - 16px);
+  object-fit: contain;       /* не режем, вписываем внутрь */
+  background: #111;          /* тёмный фон-подложка вокруг, когда кадр «не дотягивает» */
+  border-radius: 16px;
+  border: 1px solid #eee;
+}
+
+/* вариант: зафиксировать визуальную «рамку» под 16:9 (опционально)
+.gallery .slide-16x9{
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  display: block;
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.gallery .slide-16x9 > img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-height: none; 
+}
+*/
+
+/* чуть шире модалка на очень больших экранах (опционально) */
+@media (min-width: 1400px){
+  :root{ --modal-max-w: 1320px; }
+}
