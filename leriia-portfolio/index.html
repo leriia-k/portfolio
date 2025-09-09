@@ -4,11 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>leriia — Product Designer</title>
+
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="page container">
+
+    <!-- Header -->
     <header class="header">
       <a class="brand" href="#">leriia</a>
       <nav class="nav">
@@ -19,35 +25,66 @@
       </nav>
     </header>
 
+    <!-- Hero -->
     <section class="hero">
       <h1 class="mega">Product Designer</h1>
     </section>
 
+    <!-- Tiles -->
     <section class="tiles">
+      <!-- Row 1 -->
       <div class="row row--2">
-        <div class="tile tile--about" data-modal="#about-modal">
+        <!-- About Me -->
+        <div class="tile tile--about"
+             data-modal="#about-modal"
+             aria-haspopup="dialog"
+             aria-controls="about-modal"
+             aria-label="Open About modal">
           <span class="tile__title">About Me</span>
           <div class="tile__hover">
-            Leriia Kalashnikova<br />26 yo<br />4 years experience...
-            <button type="button" class="more-btn" data-modal="#about-modal">More</button>
+            Leriia Kalashnikova<br />
+            26 yo<br />
+            4 years experience...
+            <button type="button"
+                    class="more-btn"
+                    data-modal="#about-modal"
+                    aria-haspopup="dialog"
+                    aria-controls="about-modal"
+                    aria-label="Open About modal">
+              More
+            </button>
           </div>
         </div>
 
-        <div class="tile tile--media" data-modal="#loomy-modal">
+        <!-- Loomy -->
+        <div class="tile tile--media"
+             data-modal="#loomy-modal"
+             aria-haspopup="dialog"
+             aria-controls="loomy-modal"
+             aria-label="Open Loomy modal">
           <div class="media-wrap">
             <div class="tile__labels"><span class="muted">iOS App</span></div>
             <span class="tile__title">Loomy</span>
           </div>
           <img class="phone" src="assets/iphone-top.png" alt="" />
           <img class="media-cover" src="assets/loomy-cover.jpg" alt="" />
-          <button type="button" class="more-btn icon-btn" data-modal="#loomy-modal">
+          <button type="button"
+                  class="more-btn icon-btn"
+                  data-modal="#loomy-modal"
+                  aria-label="Open Loomy modal">
             <img src="assets/eye.svg" alt="eye icon" />
           </button>
         </div>
       </div>
 
+      <!-- Row 2 -->
       <div class="row row--3">
-        <button type="button" class="tile tile--projects" data-modal="#projects-modal">
+        <!-- All Projects -->
+        <button type="button" class="tile tile--projects"
+                data-modal="#projects-modal"
+                aria-haspopup="dialog"
+                aria-controls="projects-modal"
+                aria-label="Open projects modal">
           <span class="tile__title">All<br />Projects</span>
           <div class="tile__hover">
             <img src="assets/projects.svg" class="projects-icon" alt="" />
@@ -55,6 +92,7 @@
           </div>
         </button>
 
+        <!-- Resume (download) -->
         <a href="assets/leriia-resume.pdf" download class="tile tile--resume" id="resume">
           <span class="tile__title">Resume</span>
           <div class="tile__hover">
@@ -63,16 +101,29 @@
           </div>
         </a>
 
-        <div class="tile tile--skills" id="skills" data-modal="#skills-modal">
+        <!-- Skills -->
+        <div class="tile tile--skills" id="skills"
+             data-modal="#skills-modal"
+             aria-haspopup="dialog"
+             aria-controls="skills-modal"
+             aria-label="Open skills modal">
           <span class="tile__title">Skills</span>
           <div class="tile__hover">
-            Figma, Sketch, Adobe XD<br />Prototyping & Wireframing<br />UX Research, UI Design
-            <button type="button" class="more-btn" data-modal="#skills-modal">More</button>
+            Figma, Sketch, Adobe XD<br />
+            Prototyping & Wireframing<br />
+            UX Research, UI Design
+            <button type="button"
+                    class="more-btn"
+                    data-modal="#skills-modal"
+                    aria-label="Open skills modal">
+              More
+            </button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer" id="contact">
       <div class="footer__left">
         <a class="btn btn--dark" href="mailto:you@example.com">Mail Me</a>
@@ -85,14 +136,62 @@
     </footer>
   </div>
 
-  <div class="modal" id="loomy-modal">
+  <!-- ---------- About modal ---------- -->
+  <div class="modal" id="about-modal" role="dialog" aria-modal="true" aria-label="About Me" aria-hidden="true">
     <div class="modal__backdrop" data-close="modal"></div>
-    <div class="modal__sheet loomy-sheet">
-      <button class="modal__close" type="button" data-close="modal">✕</button>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+      <section class="modal__content">
+        <div class="gallery">
+          <img src="assets/about-slide-1.jpg" alt="About slide 1" />
+          <img src="assets/about-slide-2.jpg" alt="About slide 2" />
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ---------- Skills modal ---------- -->
+  <div class="modal" id="skills-modal" role="dialog" aria-modal="true" aria-label="Skills" aria-hidden="true">
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+      <section class="modal__content">
+        <div class="gallery">
+          <img src="assets/skills-slide-1.jpg" alt="Skills slide 1" />
+          <img src="assets/skills-slide-2.jpg" alt="Skills slide 2" />
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ---------- Projects modal ---------- -->
+  <div class="modal" id="projects-modal" role="dialog" aria-modal="true" aria-label="All Projects" aria-hidden="true">
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+      <section class="modal__content">
+        <div class="gallery">
+          <img src="assets/projects-slide-1.jpg" alt="Projects slide 1" />
+          <img src="assets/projects-slide-2.jpg" alt="Projects slide 2" />
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ---------- Loomy modal (fullscreen, 14 slides; #2 video) ---------- -->
+  <div class="modal" id="loomy-modal" role="dialog" aria-modal="true" aria-label="Loomy case" aria-hidden="true">
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__sheet loomy-sheet" role="document" tabindex="-1">
+      <!-- only close button on top-right -->
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+
       <section class="modal__content loomy-content">
         <div class="gallery gallery--loomy">
+          <!-- 1 -->
           <img src="assets/loomy-slide-1.jpg" alt="Loomy slide 1" />
+          <!-- 2 — video -->
           <video class="loomy-video" src="assets/loomy-slide-2.mp4" controls playsinline preload="metadata" poster="assets/loomy-slide-2-poster.jpg"></video>
+          <!-- 3..14 -->
           <img src="assets/loomy-slide-3.jpg" alt="Loomy slide 3" />
           <img src="assets/loomy-slide-4.jpg" alt="Loomy slide 4" />
           <img src="assets/loomy-slide-5.jpg" alt="Loomy slide 5" />
@@ -110,16 +209,43 @@
     </div>
   </div>
 
+  <!-- JS -->
   <script>
     (function(){
-      function openModal(m){ if(!m) return; m.classList.add('is-open'); document.documentElement.style.overflow='hidden'; }
-      function closeModal(m){ if(!m) return; m.classList.remove('is-open'); document.documentElement.style.overflow=''; m.querySelectorAll('video').forEach(v=>{ try{ v.pause(); }catch(e){} }); }
+      function openModal(m){
+        if(!m) return;
+        m.classList.add('is-open');
+        m.removeAttribute('aria-hidden');
+        document.documentElement.style.overflow='hidden';
+      }
+      function closeModal(m){
+        if(!m) return;
+        m.classList.remove('is-open');
+        m.setAttribute('aria-hidden','true');
+        document.documentElement.style.overflow='';
+        // pause videos on close
+        m.querySelectorAll('video').forEach(v=>{ try{ v.pause(); }catch(e){} });
+      }
+
       document.addEventListener('click', e=>{
         const t = e.target.closest('[data-modal]');
-        if(t){ const sel = t.getAttribute('data-modal'); const m = document.querySelector(sel); openModal(m); }
-        if(e.target && e.target.dataset.close==='modal'){ const open = e.target.closest('.modal'); closeModal(open); }
+        if(t){
+          const sel = t.getAttribute('data-modal');
+          const m = document.querySelector(sel);
+          openModal(m);
+        }
+        if(e.target && e.target.dataset.close==='modal'){
+          const open = e.target.closest('.modal');
+          closeModal(open);
+        }
       });
-      document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ const open = document.querySelector('.modal.is-open'); closeModal(open); } });
+
+      document.addEventListener('keydown', e=>{
+        if(e.key==='Escape'){
+          const open = document.querySelector('.modal.is-open');
+          closeModal(open);
+        }
+      });
     })();
   </script>
 </body>
