@@ -36,15 +36,25 @@
     <section class="tiles">
       <!-- Row 1 -->
       <div class="row row--2">
-        <!-- About Me -->
-        <a href="#about" class="tile tile--about">
+        <!-- About Me (с кнопкой More на ховере) -->
+        <div class="tile tile--about">
           <span class="tile__title">About Me</span>
           <div class="tile__hover">
             Leriia Kalashnikova<br />
             26 yo<br />
             4 years experience...
+            <!-- кнопка "More" в правом нижнем углу -->
+            <button
+              type="button"
+              class="more-btn"
+              data-modal="#about-modal"
+              aria-haspopup="dialog"
+              aria-controls="about-modal"
+              aria-label="Open About modal">
+              More
+            </button>
           </div>
-        </a>
+        </div>
 
         <!-- Loomy (cover на ховере). По клику — модальная вкладка -->
         <button
@@ -118,6 +128,26 @@
     </footer>
 
   </div> <!-- /.page -->
+
+  <!-- ---------- About modal ---------- -->
+  <div class="modal" id="about-modal" role="dialog" aria-modal="true" aria-label="About Me" aria-hidden="true">
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__sheet" role="document" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+
+      <header class="modal__header">
+        <h2 class="modal__title">About Me</h2>
+        <p class="modal__subtitle">Short bio & images</p>
+      </header>
+
+      <section class="modal__content">
+        <div class="gallery">
+          <img src="assets/loomy-slide-1.jpg" alt="About slide 1 (placeholder)" />
+          <img src="assets/loomy-slide-2.jpg" alt="About slide 2 (placeholder)" />
+        </div>
+      </section>
+    </div>
+  </div>
 
   <!-- ---------- Loomy modal ---------- -->
   <div class="modal" id="loomy-modal" role="dialog" aria-modal="true" aria-label="Loomy case" aria-hidden="true">
