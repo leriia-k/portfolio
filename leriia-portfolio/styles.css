@@ -9,49 +9,56 @@
   --loomy-bg:#1a161c;
 }
 
-/* reset / base */
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;overflow-x:hidden}
 body{
-  font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,Arial,'Noto Sans',sans-serif;
-  color:var(--ink); background:var(--bg); line-height:1.5;
+  margin:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  color:var(--ink);
+  background:var(--bg)
 }
-img,svg,video{max-width:100%;height:auto;display:block}
-a{color:inherit;text-decoration:none}
-:target{scroll-margin-top:16px}
-
-/* container */
 .container{max-width:var(--page-max);margin:0 auto;padding:0 var(--gap)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
 
-/* header */
+/* Header */
 .header{
-  display:grid;grid-template-columns:1fr auto;align-items:center;
-  padding:20px 0;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  padding:20px 0
 }
-.brand{font-weight:700;letter-spacing:.3px}
-.nav{display:flex;gap:14px;align-items:center}
-
-/* buttons */
+.brand{font-weight:700}
+.nav{display:flex;gap:14px}
 .btn{
+  padding:10px 16px;
+  border-radius:999px;
+  font-weight:600;
+  transition:.15s;
+  border:2px solid transparent;
+  cursor:pointer;
   display:inline-flex;align-items:center;justify-content:center;
-  padding:10px 16px;border-radius:999px;border:2px solid transparent;
-  font-weight:600;cursor:pointer;transition:transform .06s,background .15s,border-color .15s,color .15s;
 }
-.btn:active{transform:translateY(1px)}
 .btn--dark{background:#111;color:#fff}
-.btn--outline{background:transparent;color:#111;border-color:#111}
-.btn__icon{width:16px;height:16px;margin-right:8px}
-.btn--dark:hover,.btn--outline:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn--outline{border-color:#111;color:#111;background:transparent}
+.btn--dark:hover,.btn--outline:hover{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff
+}
+.btn__icon{margin-right:8px;width:16px;height:16px}
 
-/* hero */
+/* Hero */
 .hero{margin:32px 0 48px}
 .mega{
-  margin:0; font-weight:700; font-size:clamp(28px,7.2vw,110px);
-  letter-spacing:-.02em; line-height:1; color:#d9d9d9;
-  white-space:nowrap; text-align:center;
+  font-weight:700;
+  font-size:clamp(28px,7.2vw,110px);
+  text-align:center;
+  color:#d9d9d9;
+  margin:0;
+  white-space:nowrap
 }
 
-/* tiles — layout */
+/* Tiles layout */
 .tiles{margin:14px 0 28px}
 .row{display:grid;gap:var(--gap)}
 .row--2{grid-template-columns:repeat(12,1fr);margin-bottom:var(--gap)}
@@ -59,59 +66,91 @@ a{color:inherit;text-decoration:none}
 .row--2>.tile{grid-column:span 6}
 .row--3>.tile{grid-column:span 4}
 
-/* tile — shared */
+/* Tile */
 .tile{
-  background:var(--tile); border-radius:var(--radius); border:1px solid #e1e1e1;
-  min-height:280px; padding:28px; position:relative; overflow:hidden;
-  /* фиксируем центр заголовка стабильно */
-  display:grid; place-items:center;
-  text-align:center; transition:box-shadow .2s ease, transform .06s ease, background .2s ease, color .2s ease, opacity .2s;
+  background:var(--tile);
+  border-radius:var(--radius);
+  min-height:280px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  padding:28px;
+  text-align:center;
+  transition:.2s;
+  border:1px solid #e1e1e1;
+  overflow:hidden
 }
-.tile:hover{box-shadow:0 10px 28px rgba(0,0,0,.08);transform:translateY(-2px)}
+.tile:hover{
+  box-shadow:0 10px 28px rgba(0,0,0,.08);
+  transform:translateY(-2px)
+}
 .tile__title{
-  margin:0; font-weight:500;
-  font-size:clamp(18px,1.3vw + 14px,28px);
-  line-height:1.1; letter-spacing:-.005em;
-  /* чтобы многострочные заголовки красиво центрировались */
-  text-wrap:balance;
+  font-size:clamp(18px,1.3vw+14px,28px);
+  font-weight:500;
+  margin:0;
+  line-height:1.1
 }
 
-/* loomy (media) */
+/* Loomy */
 .tile--media{
-  background:var(--loomy-bg); color:#fff; border:none; cursor:pointer;
-  align-items:start; /* контент сверху внутри, но заголовок центрируется общим grid-контейнером */
+  background:var(--loomy-bg);
+  color:#fff;
+  align-items:flex-start;
+  justify-content:center;
+  cursor:pointer
 }
 .tile--media .media-wrap{
-  width:100%;height:100%;padding-top:18px;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  z-index:1;transition:opacity .2s ease;
+  padding-top:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  z-index:1;
+  transition:.2s
 }
-.tile--media .tile__labels{margin-bottom:6px}
-.tile--media .muted{color:rgba(255,255,255,.6);font-size:14px;letter-spacing:.2px}
-.tile--media .tile__title{margin:0;font-size:clamp(20px,1.2vw + 16px,30px);font-weight:600;color:rgba(255,255,255,.94)}
+.tile--media .muted{color:rgba(255,255,255,.6);font-size:14px}
 .tile--media .phone{
-  position:absolute;left:50%;transform:translateX(-50%);
-  bottom:-18px;width:min(92%,640px);z-index:1;transition:opacity .2s ease;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-18px;
+  width:min(92%,640px);
+  z-index:1;
+  transition:.2s
 }
 .tile--media .media-cover{
-  position:absolute;inset:0;object-fit:cover;opacity:0;transform:scale(1.02);
-  transition:opacity .25s ease, transform .25s ease; z-index:2; pointer-events:none;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:.25s;
+  z-index:2
 }
-.tile--media:hover .media-wrap,.tile--media:hover .phone{opacity:0}
+.tile--media:hover .media-wrap,
+.tile--media:hover .phone{opacity:0}
 .tile--media:hover .media-cover{opacity:1;transform:scale(1)}
 
-/* hover-reveal tiles */
+/* Hover reveal */
 .tile--about,.tile--skills,.tile--resume,.tile--projects{overflow:hidden}
 .tile--about .tile__hover,
 .tile--skills .tile__hover,
 .tile--resume .tile__hover,
 .tile--projects .tile__hover{
-  position:absolute;inset:0;padding:40px;opacity:0;pointer-events:none;
-  font-size:18px;font-weight:500;line-height:1.4;color:#111;
-  display:flex;flex-direction:column;transition:opacity .15s ease, color .15s ease;
+  position:absolute;
+  inset:0;
+  padding:40px;
+  opacity:0;
+  pointer-events:none;
+  transition:.15s;
+  display:flex;
+  flex-direction:column
 }
-/* затемнение на hover + скрываем титул */
-.tile--about:hover,.tile--skills:hover,.tile--resume:hover,.tile--projects:hover{background:#111}
+.tile--about:hover,
+.tile--skills:hover,
+.tile--resume:hover,
+.tile--projects:hover{background:#111;color:#fff}
 .tile--about:hover .tile__title,
 .tile--skills:hover .tile__title,
 .tile--resume:hover .tile__title,
@@ -119,139 +158,167 @@ a{color:inherit;text-decoration:none}
 .tile--about:hover .tile__hover,
 .tile--skills:hover .tile__hover,
 .tile--resume:hover .tile__hover,
-.tile--projects:hover .tile__hover{opacity:1;color:#fff;pointer-events:auto}
+.tile--projects:hover .tile__hover{
+  opacity:1;
+  pointer-events:auto;
+  color:#fff
+}
+.tile--about .tile__hover,
+.tile--skills .tile__hover{
+  text-align:left;
+  align-items:flex-start;
+  justify-content:flex-start
+}
+.tile--resume .tile__hover,
+.tile--projects .tile__hover{
+  align-items:center;
+  justify-content:center;
+  text-align:center
+}
+.tile--resume .resume-icon,
+.tile--projects .projects-icon{
+  width:64px;
+  height:64px;
+  margin-bottom:16px;
+  filter:invert(1)
+}
+.tile--resume .resume-text,
+.tile--projects .projects-text{
+  font-size:18px;
+  font-weight:600;
+  color:#fff
+}
 
-/* позиционирование текста в hover-слоях */
-.tile--about .tile__hover,.tile--skills .tile__hover{
-  align-items:flex-start;justify-content:flex-start;text-align:left;
-}
-.tile--resume .tile__hover,.tile--projects .tile__hover{
-  align-items:center;justify-content:center;text-align:center;
-}
-.tile--resume .resume-icon,.tile--projects .projects-icon{
-  width:64px;height:64px;margin-bottom:16px;filter:invert(1)
-}
-.tile--resume .resume-text,.tile--projects .projects-text{
-  font-size:18px;font-weight:600;color:#fff
-}
-
-/* More / eye buttons (правый нижний край) */
+/* More buttons */
 .more-btn{
-  position:absolute;right:28px;bottom:28px;
-  padding:10px 16px;border-radius:999px;background:#fff;color:#111;border:2px solid #111;
-  font-weight:600;cursor:pointer;opacity:0;transform:translateY(4px);
-  transition:opacity .15s ease, transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+  position:absolute;
+  right:28px;
+  bottom:28px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:#fff;
+  color:#111;
+  border:2px solid #111;
+  font-weight:600;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(4px);
+  transition:.15s
 }
 .tile:hover .more-btn{opacity:1;transform:translateY(0)}
 .more-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-.icon-btn{width:44px;height:44px;padding:10px;display:flex;align-items:center;justify-content:center}
-.icon-btn img{width:20px;height:20px;display:block}
-
-/* footer */
-.footer{
-  display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;
-  padding:24px 0 40px;
+.icon-btn{
+  width:44px;
+  height:44px;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center
 }
-.footer__left{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.icon-btn img{width:20px;height:20px}
+
+/* Footer */
+.footer{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  padding:24px 0 40px;
+  gap:16px
+}
+.footer__left{display:flex;gap:12px;flex-wrap:wrap}
 .footer__right{display:flex;gap:14px}
-.email{color:#333}
-.icon{display:inline-flex;width:36px;height:36px;border-radius:50%;align-items:center;justify-content:center;background:#111}
+.icon{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
 .icon img{width:18px;height:18px;filter:invert(1)}
 
-/* modals */
+/* Modal */
 .modal{
-  position:fixed;inset:0;z-index:1000;display:grid;grid-template-rows:1fr;
-  opacity:0;pointer-events:none;transition:opacity .2s ease;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  display:grid
 }
 .modal.is-open{opacity:1;pointer-events:auto}
 .modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.42)}
 .modal__sheet{
-  position:relative;max-width:var(--page-max);margin:40px auto;width:calc(100% - 2*var(--gap));
-  background:#fff;color:#111;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.2);
-  display:flex;flex-direction:column;max-height:90vh;overflow:hidden;outline:none;
+  position:relative;
+  max-width:var(--page-max);
+  margin:40px auto;
+  width:calc(100% - 2*var(--gap));
+  background:#fff;
+  border-radius:24px;
+  box-shadow:0 24px 60px rgba(0,0,0,.2);
+  max-height:90vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column
 }
 .modal__close{
-  position:absolute;top:10px;right:12px;width:36px;height:36px;border-radius:999px;background:#111;color:#fff;border:0;cursor:pointer;
+  position:absolute;
+  top:10px;
+  right:12px;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#111;
+  color:#fff;
+  border:0;
+  cursor:pointer
 }
-.modal__header{padding:24px 28px 0 28px}
+.modal__header{padding:24px 28px 0}
 .modal__title{margin:0;font-size:28px;font-weight:700}
-.modal__subtitle{margin:4px 0 12px;color:#666}
 .modal__content{padding:0 28px 28px;overflow:auto}
 .gallery{display:grid;gap:16px}
-.gallery img{width:100%;height:auto;border-radius:16px;border:1px solid #eee}
+.gallery img{width:100%;border-radius:16px;border:1px solid #eee}
 
-/* responsive */
-@media (max-width:1080px){
-  .row--2,.row--3{grid-template-columns:repeat(8,1fr)}
-  .row--2>.tile{grid-column:span 4}
-  .row--3>.tile{grid-column:span 2}
-}
-@media (max-width:900px){
-  .header{grid-template-columns:1fr;row-gap:10px;justify-items:center}
-  .nav{justify-self:center}
+/* Responsive */
+@media(max-width:900px){
   .row--2,.row--3{grid-template-columns:1fr}
   .row--2>.tile,.row--3>.tile{grid-column:auto}
-  .modal__sheet{margin:16px auto;max-height:92vh}
 }
 
-/* ===== Modal sizing tune-up ===== */
-:root{
-  --modal-max-w: 1240px;   /* макс. ширина контента модалки */
-  --modal-vpad: 28px;      /* вертикальные паддинги модалки */
-  --modal-hpad: 28px;      /* горизонтальные паддинги модалки */
-  --modal-header-h: 96px;  /* примерная высота шапки модалки (title+subtitle+отступы) */
+/* ---------- Loomy fullscreen modal ---------- */
+#loomy-modal .loomy-sheet {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ширина «листа» модалки */
-.modal__sheet{
-  max-width: var(--modal-max-w);
-  width: calc(100% - 2 * var(--gap));
+#loomy-modal .modal__header {
+  padding: 16px 24px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 5;
 }
 
-/* контент модалки — прокручиваемый, с умным лимитом по высоте */
-.modal__content{
-  padding: 0 var(--modal-hpad) var(--modal-vpad);
-  /* запас по высоте: окно 90vh минус высота шапки и нижний паддинг */
-  max-height: calc(90vh - var(--modal-header-h) - var(--modal-vpad));
-  overflow: auto;
-}
-
-/* галерея слайдов: один за другим (можно переключить на 2-колонки при желании) */
-.gallery{
-  display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr; /* всегда одна колонка = один крупный слайд в ряд */
-}
-
-/* сами изображения: вписываются целиком, без обрезки */
-.gallery img{
-  width: 100%;
-  height: auto;              /* по умолчанию авто-высота, сохраняем пропорции */
-  max-height: calc(90vh - var(--modal-header-h) - var(--modal-vpad) - 16px);
-  object-fit: contain;       /* не режем, вписываем внутрь */
-  background: #111;          /* тёмный фон-подложка вокруг, когда кадр «не дотягивает» */
-  border-radius: 16px;
-  border: 1px solid #eee;
-}
-
-/* вариант: зафиксировать визуальную «рамку» под 16:9 (опционально)
-.gallery .slide-16x9{
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  display: block;
-  background: #111;
-  border-radius: 16px;
+#loomy-modal .modal__content {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
-.gallery .slide-16x9 > img{
+
+#loomy-modal .gallery {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  max-height: none; 
-}
-*/
-
-/* чуть шире модалка на очень больших экранах (опционально) */
-@media (min-width: 1400px){
-  :root{ --modal-max-w: 1320px; }
-}
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items
