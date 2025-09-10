@@ -3,10 +3,10 @@
   --radius:28px;
   --bg:#fff;
   --ink:#111;
-  --tile:#e6e6e6;
+  --tile:#BFBFC2;
   --gap:24px;
-  --accent:#ff4fa3;
-  --loomy-bg:#1a161c;
+  --accent:#FF86D7;
+  --loomy-bg:#1D1D1F;
 
   /* Loomy topbar metrics */
   --loomy-topbar-pad:16px;   /* одинаковые отступы для левых кнопок и правой кнопки закрытия */
@@ -41,10 +41,10 @@ a{color:inherit;text-decoration:none}
   font-weight:600;cursor:pointer;transition:transform .06s,background .15s,border-color .15s,color .15s;
 }
 .btn:active{transform:translateY(1px)}
-.btn--dark{background:#111;color:#fff}
-.btn--outline{background:transparent;color:#111;border-color:#111}
+.btn--dark{background:#1D1D1F;color:#F5F5F7}
+.btn--outline{background:transparent;color:#1D1D1F;border-color:#1D1D1F}
 .btn__icon{width:16px;height:16px;margin-right:8px}
-.btn--dark:hover,.btn--outline:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn--dark:hover,.btn--outline:hover{background:var(--accent);border-color:var(--accent);color:#F5F5F72}
 .btn.small{
   height:var(--loomy-btn-h);
   padding:0 16px;
@@ -56,7 +56,7 @@ a{color:inherit;text-decoration:none}
 .hero{margin:32px 0 48px}
 .mega{
   margin:0; font-weight:700; font-size:clamp(28px,7.2vw,110px);
-  letter-spacing:-.02em; line-height:1; color:#d9d9d9;
+  letter-spacing:-.02em; line-height:1; color:#BFBFC2;
   white-space:nowrap; text-align:center;
 }
 
@@ -70,7 +70,7 @@ a{color:inherit;text-decoration:none}
 
 /* tile — shared */
 .tile{
-  background:var(--tile); border-radius:var(--radius); border:1px solid #e1e1e1;
+  background:var(--tile); border-radius:var(--radius); border:1px solid #BFBFC2;
   min-height:280px; padding:28px; position:relative; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
   text-align:center; transition:box-shadow .2s ease, transform .06s ease, background .2s ease, color .2s ease, opacity .2s;
@@ -84,7 +84,7 @@ a{color:inherit;text-decoration:none}
 
 /* loomy (media tile) */
 .tile--media{
-  background:var(--loomy-bg); color:#fff; border:none; cursor:pointer;
+  background:var(--loomy-bg); color:#F5F5F7; border:none; cursor:pointer;
   align-items:start;
 }
 .tile--media .media-wrap{
