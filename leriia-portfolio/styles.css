@@ -7,6 +7,10 @@
   --gap:24px;
   --accent:#ff4fa3;
   --loomy-bg:#1a161c;
+
+  /* Loomy topbar metrics */
+  --loomy-topbar-pad:16px;   /* одинаковые отступы для левых кнопок и правой кнопки закрытия */
+  --loomy-btn-h:40px;        /* высота кнопок в Loomy и высота ✕ */
 }
 
 *{box-sizing:border-box}
@@ -41,7 +45,12 @@ a{color:inherit;text-decoration:none}
 .btn--outline{background:transparent;color:#111;border-color:#111}
 .btn__icon{width:16px;height:16px;margin-right:8px}
 .btn--dark:hover,.btn--outline:hover{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.small{font-size:14px;padding:8px 14px;border-radius:8px}
+.btn.small{
+  height:var(--loomy-btn-h);
+  padding:0 16px;
+  border-radius:999px; /* как у Mail Me */
+  gap:8px;
+}
 
 /* hero */
 .hero{margin:32px 0 48px}
@@ -73,7 +82,7 @@ a{color:inherit;text-decoration:none}
   line-height:1.1; letter-spacing:-.005em;
 }
 
-/* loomy (media) */
+/* loomy (media tile) */
 .tile--media{
   background:var(--loomy-bg); color:#fff; border:none; cursor:pointer;
   align-items:start;
@@ -182,29 +191,44 @@ a{color:inherit;text-decoration:none}
 /* ---------- Loomy fullscreen modal ---------- */
 #loomy-modal .loomy-sheet{
   width:100vw;height:100vh;max-width:none;max-height:none;margin:0;border-radius:0;
-  display:flex;flex-direction:column;background:#fff;
+  display:flex;flex-direction:column;background:transparent; /* лист прозрачный */
 }
 
-/* верхняя панель Loomy: слева ссылки, справа — ✕ */
+/* верхняя панель Loomy — ПРОЗРАЧНАЯ, без blur/белого */
 .loomy-topbar{
   position:sticky;top:0;z-index:1001;
   display:flex;align-items:center;justify-content:space-between;
-  padding:16px 20px;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(6px);
+  padding:var(--loomy-topbar-pad);
+  background:transparent;
+  backdrop-filter:none;
 }
-/* ссылки слева */
+
+/* слева — кнопки */
 .loomy-links{display:flex;gap:12px}
 
-/* переопределяем ✕ внутри topbar — без absolute */
-.loomy-topbar .modal__close{position:static;top:auto;right:auto}
-
-/* контент на весь экран со скроллом */
-#loomy-modal .loomy-content{
-  flex:1;padding:0;overflow-y:auto;
+/* кнопки в топбаре = пилюли как Mail Me + иконки */
+.loomy-topbar .btn.small{
+  height:var(--loomy-btn-h);
+  padding:0 16px;
+  border-radius:999px;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.loomy-topbar .btn.small .btn__icon{
+  width:16px;height:16px;margin:0;display:inline-block;
 }
 
-/* галерея без отступов и без скруглений */
+/* ✕: квадрат, высота = кнопкам, ширина = высоте; отступы совпадают с паддингами topbar */
+.loomy-topbar .modal__close{
+  position:static;top:auto;right:auto;
+  width:var(--loomy-btn-h);height:var(--loomy-btn-h);
+  border-radius:999px;background:#111;color:#fff;border:0;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+
+/* контент со скроллом */
+#loomy-modal .loomy-content{flex:1;padding:0;overflow-y:auto;background:transparent}
+
+/* галерея без отступов/скруглений */
 #loomy-modal .gallery--loomy{
   display:flex;flex-direction:column;gap:0;align-items:stretch;justify-content:flex-start;
 }
