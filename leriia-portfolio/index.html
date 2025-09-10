@@ -186,10 +186,14 @@
       <!-- top bar: left = links, right = close -->
       <div class="loomy-topbar">
         <div class="loomy-links">
-          <a href="https://apps.apple.com" target="_blank" class="btn btn--dark small" rel="noopener">App Store</a>
-          <a href="https://example.com" target="_blank" class="btn btn--dark small" rel="noopener">Website</a>
+          <a href="https://apps.apple.com" target="_blank" class="btn btn--dark small" rel="noopener">
+            <img src="assets/appstore.svg" alt="" class="btn__icon" /> App Store
+          </a>
+          <a href="https://example.com" target="_blank" class="btn btn--dark small" rel="noopener">
+            <img src="assets/website.svg" alt="" class="btn__icon" /> Website
+          </a>
         </div>
-        <button class="modal__close" type="button" aria-label="Close" data-close="modal">✕</button>
+        <button class="modal__close loomy-close" type="button" aria-label="Close" data-close="modal">✕</button>
       </div>
 
       <section class="modal__content loomy-content">
@@ -230,6 +234,7 @@
         m.classList.remove('is-open');
         m.setAttribute('aria-hidden','true');
         document.documentElement.style.overflow='';
+        // pause videos on close
         m.querySelectorAll('video').forEach(v=>{ try{ v.pause(); }catch(e){} });
       }
 
