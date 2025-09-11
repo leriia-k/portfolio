@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Leriia Kalashnikova — Product Designer</title>
+  <title>leriia — Product Designer</title>
 
-  <!-- Font -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
@@ -16,7 +16,7 @@
 
     <!-- Header -->
     <header class="header">
-      <a class="brand" href="#">Leriia Kalashnikova</a>
+      <a class="brand" href="#">-</a>
       <nav class="nav">
         <a class="btn btn--outline" href="#resume">
           <img src="assets/resume.svg" alt="" class="btn__icon" /> Resume
@@ -25,9 +25,12 @@
       </nav>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero (SVG image + overlay tag) -->
     <section class="hero">
-      <h1 class="mega">Product Designer</h1>
+      <div class="hero-image">
+        <img src="assets/hero.svg" alt="Leriia Kalashnikova" />
+        <span class="hero-tag">product designer</span>
+      </div>
     </section>
 
     <!-- Tiles -->
@@ -42,9 +45,9 @@
              aria-label="Open About modal">
           <span class="tile__title">About Me</span>
           <div class="tile__hover">
-            Hi, I’m Leriia, a Product Designer.<br />
+            Hi, I’m Leriia, Product Designer.<br />
             I have 4 years of experience creating products — from the first idea and concept to launch on the market and becoming a users’ favourite.
-            <br />My passion is bringing ideas to life through visual storytelling, turning complexity into clarity.
+            <br /> My passion is bringing ideas to life through visual storytelling, turning complexity into clarity.
             <button type="button"
                     class="more-btn"
                     data-modal="#about-modal"
@@ -183,7 +186,7 @@
     <div class="modal__backdrop" data-close="modal"></div>
     <div class="modal__sheet loomy-sheet" role="document" tabindex="-1">
 
-      <!-- top bar: left = links, right = close -->
+      <!-- top bar: left = links, right = close (overlay over slides) -->
       <div class="loomy-topbar">
         <div class="loomy-links">
           <a href="https://apps.apple.com" target="_blank" class="btn btn--dark small" rel="noopener">
@@ -234,7 +237,6 @@
         m.classList.remove('is-open');
         m.setAttribute('aria-hidden','true');
         document.documentElement.style.overflow='';
-        // pause videos on close
         m.querySelectorAll('video').forEach(v=>{ try{ v.pause(); }catch(e){} });
       }
 
